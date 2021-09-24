@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.13.0-rc2/CMakeCCompiler.cmake"
   "CMakeFiles/3.13.0-rc2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.13.0-rc2/CMakeSystem.cmake"
+  "/usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake"
   "/usr/local/share/cmake-3.13/Modules/CMakeCInformation.cmake"
   "/usr/local/share/cmake-3.13/Modules/CMakeCXXInformation.cmake"
   "/usr/local/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"

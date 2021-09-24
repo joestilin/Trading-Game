@@ -6,7 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/cpp-capstone/TradingGame/src/main.cpp
+/home/workspace/cpp-capstone/TradingGame/src/databar.h
+string
+-
+
+/home/workspace/cpp-capstone/TradingGame/src/dataparser.cpp
+dataparser.h
+/home/workspace/cpp-capstone/TradingGame/src/dataparser.h
+databar.h
+/home/workspace/cpp-capstone/TradingGame/src/databar.h
 iostream
+-
+fstream
+-
+sstream
+-
+
+/home/workspace/cpp-capstone/TradingGame/src/dataparser.h
+databar.h
+/home/workspace/cpp-capstone/TradingGame/src/databar.h
+vector
 -
 

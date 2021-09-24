@@ -1,9 +1,14 @@
 #include "dataframe.h"
+#include <iostream>
 
+DataFrame::DataFrame() { }
 
-class DataFrame {
-    public:
+void DataFrame::LoadData() {
+    parser.ParseData(*data);
+}
 
-        DataFrame() {}
-    
-};
+void DataFrame::PrintData() {
+    for (auto databar : *data) {
+        std::cout << databar.date << " " << databar.time << "\n";
+    }
+}

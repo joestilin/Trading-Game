@@ -123,6 +123,141 @@ TradingGame/fast:
 	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/build
 .PHONY : TradingGame/fast
 
+src/controller.o: src/controller.cpp.o
+
+.PHONY : src/controller.o
+
+# target to build an object file
+src/controller.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/controller.cpp.o
+.PHONY : src/controller.cpp.o
+
+src/controller.i: src/controller.cpp.i
+
+.PHONY : src/controller.i
+
+# target to preprocess a source file
+src/controller.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/controller.cpp.i
+.PHONY : src/controller.cpp.i
+
+src/controller.s: src/controller.cpp.s
+
+.PHONY : src/controller.s
+
+# target to generate assembly for a file
+src/controller.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/controller.cpp.s
+.PHONY : src/controller.cpp.s
+
+src/databar.o: src/databar.cpp.o
+
+.PHONY : src/databar.o
+
+# target to build an object file
+src/databar.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/databar.cpp.o
+.PHONY : src/databar.cpp.o
+
+src/databar.i: src/databar.cpp.i
+
+.PHONY : src/databar.i
+
+# target to preprocess a source file
+src/databar.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/databar.cpp.i
+.PHONY : src/databar.cpp.i
+
+src/databar.s: src/databar.cpp.s
+
+.PHONY : src/databar.s
+
+# target to generate assembly for a file
+src/databar.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/databar.cpp.s
+.PHONY : src/databar.cpp.s
+
+src/dataframe.o: src/dataframe.cpp.o
+
+.PHONY : src/dataframe.o
+
+# target to build an object file
+src/dataframe.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataframe.cpp.o
+.PHONY : src/dataframe.cpp.o
+
+src/dataframe.i: src/dataframe.cpp.i
+
+.PHONY : src/dataframe.i
+
+# target to preprocess a source file
+src/dataframe.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataframe.cpp.i
+.PHONY : src/dataframe.cpp.i
+
+src/dataframe.s: src/dataframe.cpp.s
+
+.PHONY : src/dataframe.s
+
+# target to generate assembly for a file
+src/dataframe.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataframe.cpp.s
+.PHONY : src/dataframe.cpp.s
+
+src/dataparser.o: src/dataparser.cpp.o
+
+.PHONY : src/dataparser.o
+
+# target to build an object file
+src/dataparser.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataparser.cpp.o
+.PHONY : src/dataparser.cpp.o
+
+src/dataparser.i: src/dataparser.cpp.i
+
+.PHONY : src/dataparser.i
+
+# target to preprocess a source file
+src/dataparser.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataparser.cpp.i
+.PHONY : src/dataparser.cpp.i
+
+src/dataparser.s: src/dataparser.cpp.s
+
+.PHONY : src/dataparser.s
+
+# target to generate assembly for a file
+src/dataparser.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/dataparser.cpp.s
+.PHONY : src/dataparser.cpp.s
+
+src/game.o: src/game.cpp.o
+
+.PHONY : src/game.o
+
+# target to build an object file
+src/game.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/game.cpp.o
+.PHONY : src/game.cpp.o
+
+src/game.i: src/game.cpp.i
+
+.PHONY : src/game.i
+
+# target to preprocess a source file
+src/game.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/game.cpp.i
+.PHONY : src/game.cpp.i
+
+src/game.s: src/game.cpp.s
+
+.PHONY : src/game.s
+
+# target to generate assembly for a file
+src/game.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/game.cpp.s
+.PHONY : src/game.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -150,6 +285,60 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/renderer.o: src/renderer.cpp.o
+
+.PHONY : src/renderer.o
+
+# target to build an object file
+src/renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/renderer.cpp.o
+.PHONY : src/renderer.cpp.o
+
+src/renderer.i: src/renderer.cpp.i
+
+.PHONY : src/renderer.i
+
+# target to preprocess a source file
+src/renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/renderer.cpp.i
+.PHONY : src/renderer.cpp.i
+
+src/renderer.s: src/renderer.cpp.s
+
+.PHONY : src/renderer.s
+
+# target to generate assembly for a file
+src/renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/renderer.cpp.s
+.PHONY : src/renderer.cpp.s
+
+src/tradelog.o: src/tradelog.cpp.o
+
+.PHONY : src/tradelog.o
+
+# target to build an object file
+src/tradelog.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/tradelog.cpp.o
+.PHONY : src/tradelog.cpp.o
+
+src/tradelog.i: src/tradelog.cpp.i
+
+.PHONY : src/tradelog.i
+
+# target to preprocess a source file
+src/tradelog.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/tradelog.cpp.i
+.PHONY : src/tradelog.cpp.i
+
+src/tradelog.s: src/tradelog.cpp.s
+
+.PHONY : src/tradelog.s
+
+# target to generate assembly for a file
+src/tradelog.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/tradelog.cpp.s
+.PHONY : src/tradelog.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +348,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... TradingGame"
 	@echo "... edit_cache"
+	@echo "... src/controller.o"
+	@echo "... src/controller.i"
+	@echo "... src/controller.s"
+	@echo "... src/databar.o"
+	@echo "... src/databar.i"
+	@echo "... src/databar.s"
+	@echo "... src/dataframe.o"
+	@echo "... src/dataframe.i"
+	@echo "... src/dataframe.s"
+	@echo "... src/dataparser.o"
+	@echo "... src/dataparser.i"
+	@echo "... src/dataparser.s"
+	@echo "... src/game.o"
+	@echo "... src/game.i"
+	@echo "... src/game.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/renderer.o"
+	@echo "... src/renderer.i"
+	@echo "... src/renderer.s"
+	@echo "... src/tradelog.o"
+	@echo "... src/tradelog.i"
+	@echo "... src/tradelog.s"
 .PHONY : help
 
 

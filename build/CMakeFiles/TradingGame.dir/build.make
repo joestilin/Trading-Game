@@ -70,17 +70,122 @@ CMakeFiles/TradingGame.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/main.cpp.s"
 	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/main.cpp -o CMakeFiles/TradingGame.dir/src/main.cpp.s
 
+CMakeFiles/TradingGame.dir/src/game.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TradingGame.dir/src/game.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/game.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/game.cpp
+
+CMakeFiles/TradingGame.dir/src/game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/game.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/game.cpp > CMakeFiles/TradingGame.dir/src/game.cpp.i
+
+CMakeFiles/TradingGame.dir/src/game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/game.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/game.cpp -o CMakeFiles/TradingGame.dir/src/game.cpp.s
+
+CMakeFiles/TradingGame.dir/src/renderer.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TradingGame.dir/src/renderer.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/renderer.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/renderer.cpp
+
+CMakeFiles/TradingGame.dir/src/renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/renderer.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/renderer.cpp > CMakeFiles/TradingGame.dir/src/renderer.cpp.i
+
+CMakeFiles/TradingGame.dir/src/renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/renderer.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/renderer.cpp -o CMakeFiles/TradingGame.dir/src/renderer.cpp.s
+
+CMakeFiles/TradingGame.dir/src/controller.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/controller.cpp.o: ../src/controller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TradingGame.dir/src/controller.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/controller.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/controller.cpp
+
+CMakeFiles/TradingGame.dir/src/controller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/controller.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/controller.cpp > CMakeFiles/TradingGame.dir/src/controller.cpp.i
+
+CMakeFiles/TradingGame.dir/src/controller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/controller.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/controller.cpp -o CMakeFiles/TradingGame.dir/src/controller.cpp.s
+
+CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/tradelog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TradingGame.dir/src/tradelog.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/tradelog.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp
+
+CMakeFiles/TradingGame.dir/src/tradelog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/tradelog.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp > CMakeFiles/TradingGame.dir/src/tradelog.cpp.i
+
+CMakeFiles/TradingGame.dir/src/tradelog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/tradelog.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp -o CMakeFiles/TradingGame.dir/src/tradelog.cpp.s
+
+CMakeFiles/TradingGame.dir/src/dataframe.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/dataframe.cpp.o: ../src/dataframe.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TradingGame.dir/src/dataframe.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/dataframe.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/dataframe.cpp
+
+CMakeFiles/TradingGame.dir/src/dataframe.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/dataframe.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/dataframe.cpp > CMakeFiles/TradingGame.dir/src/dataframe.cpp.i
+
+CMakeFiles/TradingGame.dir/src/dataframe.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/dataframe.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/dataframe.cpp -o CMakeFiles/TradingGame.dir/src/dataframe.cpp.s
+
+CMakeFiles/TradingGame.dir/src/databar.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/databar.cpp.o: ../src/databar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/TradingGame.dir/src/databar.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/databar.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/databar.cpp
+
+CMakeFiles/TradingGame.dir/src/databar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/databar.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/databar.cpp > CMakeFiles/TradingGame.dir/src/databar.cpp.i
+
+CMakeFiles/TradingGame.dir/src/databar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/databar.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/databar.cpp -o CMakeFiles/TradingGame.dir/src/databar.cpp.s
+
+CMakeFiles/TradingGame.dir/src/dataparser.cpp.o: CMakeFiles/TradingGame.dir/flags.make
+CMakeFiles/TradingGame.dir/src/dataparser.cpp.o: ../src/dataparser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TradingGame.dir/src/dataparser.cpp.o"
+	/usr/bin/g++-7  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TradingGame.dir/src/dataparser.cpp.o -c /home/workspace/cpp-capstone/TradingGame/src/dataparser.cpp
+
+CMakeFiles/TradingGame.dir/src/dataparser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TradingGame.dir/src/dataparser.cpp.i"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/workspace/cpp-capstone/TradingGame/src/dataparser.cpp > CMakeFiles/TradingGame.dir/src/dataparser.cpp.i
+
+CMakeFiles/TradingGame.dir/src/dataparser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TradingGame.dir/src/dataparser.cpp.s"
+	/usr/bin/g++-7 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/workspace/cpp-capstone/TradingGame/src/dataparser.cpp -o CMakeFiles/TradingGame.dir/src/dataparser.cpp.s
+
 # Object files for target TradingGame
 TradingGame_OBJECTS = \
-"CMakeFiles/TradingGame.dir/src/main.cpp.o"
+"CMakeFiles/TradingGame.dir/src/main.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/game.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/renderer.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/controller.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/tradelog.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/dataframe.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/databar.cpp.o" \
+"CMakeFiles/TradingGame.dir/src/dataparser.cpp.o"
 
 # External object files for target TradingGame
 TradingGame_EXTERNAL_OBJECTS =
 
 TradingGame: CMakeFiles/TradingGame.dir/src/main.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/game.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/renderer.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/controller.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/tradelog.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/dataframe.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/databar.cpp.o
+TradingGame: CMakeFiles/TradingGame.dir/src/dataparser.cpp.o
 TradingGame: CMakeFiles/TradingGame.dir/build.make
 TradingGame: CMakeFiles/TradingGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable TradingGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable TradingGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TradingGame.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
