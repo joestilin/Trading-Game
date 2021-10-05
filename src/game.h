@@ -14,8 +14,8 @@ class Game {
         void Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration);
 
     private:
-        DataFrame *dataframe;
-        TradeLog *tradelog;
+        DataFrame dataframe;
+        TradeLog tradelog;
 
 };
 

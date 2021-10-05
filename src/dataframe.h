@@ -9,7 +9,7 @@ class DataFrame {
         void LoadData();
         void PrintData();
         
-        std::vector<DataBar> *data;
+        std::vector<DataBar> data;
         
     private:
         DataParser parser;

@@ -6,7 +6,7 @@
 Game::Game() {
 
     // create financial dataframe from file
-    dataframe->LoadData();
+    dataframe.LoadData();
 
 }
 
@@ -15,7 +15,7 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
     bool running = true;
 
     // a test
-    dataframe->PrintData();
+    dataframe.PrintData();
 
     // game loop
     while (running) {

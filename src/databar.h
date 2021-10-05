@@ -11,10 +11,10 @@ class DataBar {
 
         std::string date;
         std::string time;
-        float open;
-        float high;
-        float low;
-        float close;
+        double open;
+        double high;
+        double low;
+        double close;
     
     private:
 };
