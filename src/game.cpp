@@ -20,7 +20,7 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
     // game loop
     while (running) {
         controller.HandleInput(running);
-        renderer.Render();
+        renderer.Render(dataframe);
         SDL_Delay(10);
 
     }

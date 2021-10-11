@@ -22,6 +22,8 @@ void DataParser::ParseData(std::vector<DataBar> &data) {
 
     if (stream.is_open()) {
         std::cout << "File opened!" << "\n";
+
+        // skip the first line in the file; it contains column labels
         while (std::getline(stream, line)) {
             if (!firstline) {
                 row.clear();
