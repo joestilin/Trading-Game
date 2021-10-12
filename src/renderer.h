@@ -9,7 +9,7 @@ class Renderer {
         Renderer(const std::size_t screen_width, const std::size_t screen_height);
         ~Renderer();
 
-        void Render(DataFrame const &dataframe);
+        void Render(DataFrame const &dataframe, std::size_t const &scroll_position);
 
 
     private:

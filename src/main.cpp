@@ -17,7 +17,7 @@ int main () {
     std::string arg2 = " 30m";
     std::string command = "python3 ";
     command += data_reader_file + arg1 + arg2;
-    system(command.c_str());
+    //system(command.c_str());
 
     std::size_t kFramesPerSecond{60};
     std::size_t kMsPerFrame = 1000 / kFramesPerSecond;

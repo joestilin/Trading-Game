@@ -31,12 +31,12 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
  }
 
- void Renderer::Render(DataFrame const &dataframe) {
+ void Renderer::Render(DataFrame const &dataframe, std::size_t const &scroll_position) {
      SDL_Rect block;
-     block.h = 50;
-     block.w = 50;
-     block.x = 100;
-     block.y = 300;
+     block.x = 0;
+     block.y = 0;
+     block.w = 0;
+     block.h = 0;
 
      // clear screen
 
@@ -49,6 +49,10 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      double bar_width = screen_width / dataframe.n_bars;
      double slope = screen_height / (dataframe.max_high - dataframe.min_low);
      int bar_number = 0;
+     int bar_gap = 4;
+     int x_offset = screen_width - scroll_position * screen_width / 100;
+     int x = 0;
+     int y = 0;
 
      for (auto &bar : dataframe.data) {
 
@@ -61,23 +65,33 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
          }
 
         // candle body position and dimensions
-         block.x = bar_width * bar_number;
-         block.y = screen_height - slope * ((bar.open + bar.close) / 2 - dataframe.min_low);
-         block.h = std::abs(bar.open - bar.close)*slope;
-         block.w = bar_width - 5;
+         x = bar_width * bar_number + bar_gap + x_offset;
+         y = screen_height - slope * (std::max(bar.open, bar.close) - dataframe.min_low);
+
+         if (x >= 0) {
+            block.x = x;
+            block.y = y;
+            block.h = std::abs(bar.open - bar.close)*slope;
+            block.w = bar_width - bar_gap;
+         }
 
          // Draw the candle
-         SDL_RenderFillRect(sdl_renderer, &block);
-
+        SDL_RenderFillRect(sdl_renderer, &block);
+         
         // wick body position and dimensions
-        block.x = bar_width * bar_number + bar_width / 2 - 1;
-        block.y = screen_height - slope * ((bar.low + bar.high) / 2 - dataframe.min_low);
-        block.h = std::abs(bar.high - bar.low)*slope;
-        block.w = 1;
+        x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
+        y = screen_height - slope * (std::max(bar.high, bar.low) - dataframe.min_low);
+
+        if (x >= 0) {
+            block.x = x;
+            block.y = y;
+            block.h = std::abs(bar.high - bar.low)*slope;
+            block.w = 1;
+        }
 
         // Draw the wick
-         SDL_RenderFillRect(sdl_renderer, &block);
-
+        SDL_RenderFillRect(sdl_renderer, &block);
+        
         bar_number++;   
      }
 

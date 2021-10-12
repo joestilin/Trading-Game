@@ -6,7 +6,7 @@ class Controller {
 
     public:
         Controller();
-        void HandleInput(bool &running);
+        void HandleInput(bool &running, bool &scrolling);
 
 };
 

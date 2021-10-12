@@ -12,17 +12,22 @@ Game::Game() {
 
 void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration) {
 
-    bool running = true;
-
     // a test
-    dataframe.PrintData();
+    // dataframe.PrintData();
 
     // game loop
     while (running) {
-        controller.HandleInput(running);
-        renderer.Render(dataframe);
+        scrolling = false;
+        controller.HandleInput(running, scrolling);
+        Update();
+        renderer.Render(dataframe, scroll_position);
         SDL_Delay(10);
-
     }
 
+}
+
+void Game::Update() {
+    if (scrolling) {
+        scroll_position++;
+    }
 }
