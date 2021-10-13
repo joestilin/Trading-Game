@@ -20,7 +20,7 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
         scrolling = false;
         controller.HandleInput(running, scrolling);
         Update();
-        renderer.Render(dataframe, scroll_position);
+        renderer.Render(dataframe, scrolling);
         SDL_Delay(10);
     }
 

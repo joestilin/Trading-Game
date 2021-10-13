@@ -29,9 +29,15 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         std::cerr << "SDL error: " << SDL_GetError() << "\n";
     }
 
+    // initialize display constants
+    InitializeDisplay();
+
  }
 
- void Renderer::Render(DataFrame const &dataframe, std::size_t const &scroll_position) {
+ void Renderer::Render(DataFrame const &dataframe, bool const &scrolling) {
+
+     UpdateScrolling(scrolling);
+
      SDL_Rect block;
      block.x = 0;
      block.y = 0;
@@ -44,13 +50,10 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      SDL_RenderClear(sdl_renderer);
 
      // draw
-    SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0xFF, 0xFF);
-
      double bar_width = screen_width / dataframe.n_bars;
      double slope = screen_height / (dataframe.max_high - dataframe.min_low);
      int bar_number = 0;
      int bar_gap = 4;
-     int x_offset = screen_width - scroll_position * screen_width / 100;
      int x = 0;
      int y = 0;
 
@@ -103,6 +106,14 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 Renderer::~Renderer() { 
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
+}
+
+void Renderer::InitializeDisplay(){}
+
+void Renderer::UpdateScrolling(bool const &scrolling) {
+    if (scrolling) {
+        x_offset -= scroll_speed;
+    }
 }
 
     
