@@ -31,12 +31,26 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
     // initialize display constants
     InitializeDisplay();
+    
 
  }
 
  void Renderer::Render(DataFrame const &dataframe, bool const &scrolling) {
 
+    
      UpdateScrolling(scrolling);
+
+     ClearScreen();
+     
+     UpdateXScale(dataframe);
+    
+     // draw
+     
+     
+     int bar_number = 0;
+     int bar_gap = 4;
+     int x = 0;
+     int y = 0;
 
      SDL_Rect block;
      block.x = 0;
@@ -44,37 +58,18 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      block.w = 0;
      block.h = 0;
 
-     // clear screen
-
-     SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
-     SDL_RenderClear(sdl_renderer);
-
-     // draw
-     double bar_width = screen_width / dataframe.n_bars;
-     double slope = screen_height / (dataframe.max_high - dataframe.min_low);
-     int bar_number = 0;
-     int bar_gap = 4;
-     int x = 0;
-     int y = 0;
-
      for (auto &bar : dataframe.data) {
 
-         // set candlestick color
-         if (bar.close >= bar.open) {
-             SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
-         }
-         else {
-             SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-         }
+         SetCandleStickColor(bar);
 
         // candle body position and dimensions
          x = bar_width * bar_number + bar_gap + x_offset;
-         y = screen_height - slope * (std::max(bar.open, bar.close) - dataframe.min_low);
+         y = screen_height - x_scale * (std::max(bar.open, bar.close) - dataframe.min_low);
 
-         if (x >= 0) {
+         if (x >= left_margin) {
             block.x = x;
             block.y = y;
-            block.h = std::abs(bar.open - bar.close)*slope;
+            block.h = std::abs(bar.open - bar.close)*x_scale;
             block.w = bar_width - bar_gap;
          }
 
@@ -83,12 +78,12 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
          
         // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
-        y = screen_height - slope * (std::max(bar.high, bar.low) - dataframe.min_low);
+        y = screen_height - x_scale * (std::max(bar.high, bar.low) - dataframe.min_low);
 
-        if (x >= 0) {
+        if (x >= left_margin) {
             block.x = x;
             block.y = y;
-            block.h = std::abs(bar.high - bar.low)*slope;
+            block.h = std::abs(bar.high - bar.low)*x_scale;
             block.w = 1;
         }
 
@@ -108,12 +103,35 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::InitializeDisplay(){}
+
+void Renderer::InitializeDisplay() {
+    bar_width = (screen_width - left_margin - right_margin) / max_bars_displayed;
+}
 
 void Renderer::UpdateScrolling(bool const &scrolling) {
     if (scrolling) {
         x_offset -= scroll_speed;
     }
+}
+
+void Renderer::ClearScreen() {
+    SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+    SDL_RenderClear(sdl_renderer);
+}
+
+void Renderer::UpdateXScale(DataFrame const &dataframe) {
+    x_scale = (screen_height - top_margin - bottom_margin) / (dataframe.max_high - dataframe.min_low);
+
+}
+
+void Renderer::SetCandleStickColor(DataBar const &bar) {
+    // set candlestick color
+         if (bar.close >= bar.open) {
+             SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+         }
+         else {
+             SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+         }
 }
 
     
