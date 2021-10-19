@@ -24,10 +24,18 @@ void DataFrame::CalculateData() {
      for (auto &bar : data) {
          if (bar.high > max_high) {
              max_high = bar.high;
+             bar.max_high = bar.high;
+         }
+         else{ 
+             bar.max_high = max_high;
          }
 
          if (bar.low  < min_low) {
              min_low = bar.low;
+             bar.min_low = bar.low;
+         }
+         else {
+             bar.min_low = min_low;
          }
      }
 
