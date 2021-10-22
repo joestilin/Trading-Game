@@ -42,10 +42,11 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
      ClearScreen();
      
+     UpdateBarsDisplayed(dataframe);
+
      UpdateXScale(dataframe);
 
-     UpdateBarsDisplayed(dataframe);
-    
+     
      // draw
      
      int bar_number = 0;
@@ -64,7 +65,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
         // candle body position and dimensions
          x = bar_width * bar_number + bar_gap + x_offset;
-         y = screen_height - x_scale * (std::max(bar.open, bar.close) - dataframe.data[bars_displayed].min_low);
+         y = screen_height - x_scale * (std::max(bar.open, bar.close) - dataframe.data[bars_displayed - 1].min_low);
 
          if (x >= left_margin && y >= top_margin) {
             block.x = x;
@@ -78,7 +79,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
          
         // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
-        y = screen_height - x_scale * (std::max(bar.high, bar.low) - dataframe.data[bars_displayed].min_low);
+        y = screen_height - x_scale * (std::max(bar.high, bar.low) - dataframe.data[bars_displayed - 1].min_low);
 
         if (x >= left_margin && y >= top_margin) {
             block.x = x;
@@ -121,12 +122,12 @@ void Renderer::ClearScreen() {
 
 void Renderer::UpdateXScale(DataFrame const &dataframe) {
     x_scale = (screen_height - top_margin - bottom_margin) / 
-                (dataframe.data[bars_displayed].max_high - dataframe.data[bars_displayed].min_low);
+                (dataframe.data[bars_displayed - 1].rolling_high - dataframe.data[bars_displayed - 1].min_low);
 
 }
 
 void Renderer::UpdateBarsDisplayed(DataFrame const &dataframe) {
-    bars_displayed = (screen_width - x_offset) / bar_width;
+    bars_displayed = std::min((screen_width - x_offset) / bar_width,  dataframe.n_bars);
 }
 
 void Renderer::SetCandleStickColor(DataBar const &bar) {

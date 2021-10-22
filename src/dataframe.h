@@ -19,7 +19,8 @@ class DataFrame {
         std::size_t n_bars;
         
     private:
-        void CalculateData();
+        void CalculateExtremes();
+        void CalculateRollingMax(int window);
         DataParser parser;
 
 

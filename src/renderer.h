@@ -28,7 +28,7 @@ class Renderer {
         const std::size_t screen_height;
 
         // Chart display variables
-        int scroll_speed{10};       // pixels / frame
+        int scroll_speed{50};       // pixels / frame
         int x_offset{1200};          // pixels
         int y_offset{0};            // pixels
         int bars_displayed;
@@ -37,7 +37,7 @@ class Renderer {
         int bottom_margin{10};
         int right_margin{10};
         int left_margin{10};
-        double bar_width;
+        int bar_width;
         int bar_gap{5};
         double x_scale;             // pixels per data unit
         double y_scale;

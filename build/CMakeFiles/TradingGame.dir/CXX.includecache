@@ -10,8 +10,18 @@
 SDL2/SDL.h
 -
 
+/home/workspace/cpp-capstone/TradingGame/src/databar.cpp
+databar.h
+/home/workspace/cpp-capstone/TradingGame/src/databar.h
+
 /home/workspace/cpp-capstone/TradingGame/src/databar.h
 string
+-
+
+/home/workspace/cpp-capstone/TradingGame/src/dataframe.cpp
+dataframe.h
+/home/workspace/cpp-capstone/TradingGame/src/dataframe.h
+iostream
 -
 
 /home/workspace/cpp-capstone/TradingGame/src/dataframe.h
@@ -21,6 +31,18 @@ databar.h
 /home/workspace/cpp-capstone/TradingGame/src/databar.h
 dataparser.h
 /home/workspace/cpp-capstone/TradingGame/src/dataparser.h
+
+/home/workspace/cpp-capstone/TradingGame/src/dataparser.cpp
+dataparser.h
+/home/workspace/cpp-capstone/TradingGame/src/dataparser.h
+databar.h
+/home/workspace/cpp-capstone/TradingGame/src/databar.h
+iostream
+-
+fstream
+-
+sstream
+-
 
 /home/workspace/cpp-capstone/TradingGame/src/dataparser.h
 databar.h
