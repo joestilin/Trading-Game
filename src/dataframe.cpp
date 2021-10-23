@@ -7,7 +7,8 @@ void DataFrame::LoadData() {
     parser.ParseData(data);
     n_bars = data.size();
     CalculateExtremes();
-    CalculateRollingMax(10);
+    CalculateRollingMax(25);
+    CalculateSMA(100);
 }
 
 void DataFrame::PrintData() {
@@ -62,4 +63,20 @@ void DataFrame::CalculateRollingMax(int window) {
         data[i].rolling_low = min;
     }
 
+}
+
+void DataFrame::CalculateSMA(int window) {
+    double sum = 0;
+    for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
+        sum += data[i].close;
+        if (i > window) {
+            sum -= data[i - window].close;
+            data[i].sma = sum / window;
+        }
+        else 
+        {
+            data[i].sma = sum / (i + 1);
+        }
+
+    }
 }

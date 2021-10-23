@@ -40,7 +40,7 @@ class Renderer {
         int bar_width;
         int bar_gap{5};
         double x_scale;             // pixels per data unit
-        double y_scale;
+        double y_scale{400};
 
 };
 #endif

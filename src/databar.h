@@ -19,6 +19,7 @@ class DataBar {
         double max_high;    // the highest high seen so far in the dataframe data vector containing this bar
         double rolling_high;
         double rolling_low;
+        double sma;
     
     private:
 };

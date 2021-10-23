@@ -21,6 +21,7 @@ class DataFrame {
     private:
         void CalculateExtremes();
         void CalculateRollingMax(int window);
+        void CalculateSMA(int window);
         DataParser parser;
 
 
