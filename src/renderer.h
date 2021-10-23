@@ -3,13 +3,17 @@
 
 #include <SDL2/SDL.h>
 #include "dataframe.h"
+#include "tradelog.h"
 
 class Renderer {
     public:
         Renderer(const std::size_t screen_width, const std::size_t screen_height);
         ~Renderer();
 
-        void Render(DataFrame const &dataframe, bool const &scrolling);
+        void Render(DataFrame const &dataframe, TradeLog const &tradelog, 
+                    bool const &scrolling);
+
+        int bars_displayed;
 
 
     private:
@@ -31,8 +35,7 @@ class Renderer {
         int scroll_speed{50};       // pixels / frame
         int x_offset{1200};          // pixels
         int y_offset{0};            // pixels
-        int bars_displayed;
-        int max_bars_displayed{50};
+        int max_bars_displayed{100};
         int top_margin{10};
         int bottom_margin{10};
         int right_margin{10};
@@ -40,7 +43,7 @@ class Renderer {
         int bar_width;
         int bar_gap{5};
         double x_scale;             // pixels per data unit
-        double y_scale{400};
+        double y_scale{200};
 
 };
 #endif

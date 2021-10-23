@@ -35,7 +35,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
  }
 
- void Renderer::Render(DataFrame const &dataframe, bool const &scrolling) {
+ void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, bool const &scrolling) {
 
     
      UpdateScrolling(scrolling);

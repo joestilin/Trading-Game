@@ -18,16 +18,23 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
     // game loop
     while (running) {
         scrolling = false;
-        controller.HandleInput(running, scrolling);
-        Update();
-        renderer.Render(dataframe, scrolling);
+        controller.HandleInput(running, scrolling, buying, selling);
+        Update(renderer);
+        renderer.Render(dataframe, tradelog, scrolling);
         SDL_Delay(10);
     }
 
 }
 
-void Game::Update() {
+void Game::Update(Renderer &renderer) {
     if (scrolling) {
         scroll_position++;
+    }
+    if (buying) {
+        // TODO: close trade if short, create new trade if long
+    }
+    if (selling) {
+        // TODO: close trade if long, create new trade if short
+
     }
 }

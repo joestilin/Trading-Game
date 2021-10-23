@@ -2,7 +2,7 @@
 
 Controller::Controller() { }
 
-void Controller::HandleInput(bool &running, bool &scrolling) {
+void Controller::HandleInput(bool &running, bool &scrolling, bool &buying, bool &selling) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
@@ -12,6 +12,10 @@ void Controller::HandleInput(bool &running, bool &scrolling) {
                 switch (e.key.keysym.sym) {
                     case SDLK_RIGHT:
                         scrolling = true;
+                    case SDLK_UP:
+                        buying = true;
+                    case SDLK_DOWN:
+                        selling = true;
                 }
          }
         

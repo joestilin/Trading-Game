@@ -40,6 +40,7 @@ CMakeFiles/TradingGame.dir/src/renderer.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/dataparser.h
  /home/workspace/cpp-capstone/TradingGame/src/renderer.cpp
  /home/workspace/cpp-capstone/TradingGame/src/renderer.h
+ /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.h

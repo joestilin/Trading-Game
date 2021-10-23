@@ -11,7 +11,7 @@ class Game {
     public:
         Game();
         void Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration);
-        void Update();
+        void Update(Renderer &renderer);
 
     private:
         DataFrame dataframe;
@@ -21,6 +21,8 @@ class Game {
         std::size_t scroll_position = 10;
         bool running = true;
         bool scrolling = false;
+        bool buying = false;
+        bool selling = false;
 
 };
 

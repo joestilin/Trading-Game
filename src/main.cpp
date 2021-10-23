@@ -13,7 +13,7 @@ int main () {
     // For now, input data is hardcoded; will be changed in the future
     // call python script to grab finanical data
     std::string data_reader_file = "/home/workspace/cpp-capstone/TradingGame/src/data.py";
-    std::string arg1 = " RUN";
+    std::string arg1 = " BA";
     std::string arg2 = " 5m";
     std::string command = "python3 ";
     command += data_reader_file + arg1 + arg2;

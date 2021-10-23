@@ -39,6 +39,7 @@ CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/dataframe.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/dataparser.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/renderer.cpp
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/renderer.h
+CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/tradelog.h
 
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/tradelog.cpp
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/tradelog.h

@@ -6,18 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/cpp-capstone/TradingGame/src/controller.cpp
+controller.h
+/home/workspace/cpp-capstone/TradingGame/src/controller.h
+
 /home/workspace/cpp-capstone/TradingGame/src/controller.h
 SDL2/SDL.h
 -
 
 /home/workspace/cpp-capstone/TradingGame/src/databar.h
 string
--
-
-/home/workspace/cpp-capstone/TradingGame/src/dataframe.cpp
-dataframe.h
-/home/workspace/cpp-capstone/TradingGame/src/dataframe.h
-iostream
 -
 
 /home/workspace/cpp-capstone/TradingGame/src/dataframe.h
@@ -75,6 +73,8 @@ SDL2/SDL.h
 -
 dataframe.h
 /home/workspace/cpp-capstone/TradingGame/src/dataframe.h
+tradelog.h
+/home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 
 /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 
