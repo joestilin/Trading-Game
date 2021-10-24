@@ -23,6 +23,7 @@ CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/dataparser.h
 CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/game.cpp
 CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/game.h
 CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/renderer.h
+CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/trade.h
 CMakeFiles/TradingGame.dir/src/game.cpp.o: ../src/tradelog.h
 
 CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/controller.h
@@ -32,6 +33,7 @@ CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/dataparser.h
 CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/game.h
 CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/renderer.h
+CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/trade.h
 CMakeFiles/TradingGame.dir/src/main.cpp.o: ../src/tradelog.h
 
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/databar.h
@@ -39,8 +41,10 @@ CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/dataframe.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/dataparser.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/renderer.cpp
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/renderer.h
+CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/trade.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o: ../src/tradelog.h
 
+CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/trade.h
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/tradelog.cpp
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o: ../src/tradelog.h
 

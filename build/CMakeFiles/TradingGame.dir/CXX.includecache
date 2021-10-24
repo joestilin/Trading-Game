@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/cpp-capstone/TradingGame/src/controller.cpp
-controller.h
-/home/workspace/cpp-capstone/TradingGame/src/controller.h
-
 /home/workspace/cpp-capstone/TradingGame/src/controller.h
 SDL2/SDL.h
 -
@@ -37,6 +33,8 @@ game.h
 /home/workspace/cpp-capstone/TradingGame/src/game.h
 SDL2/SDL.h
 -
+trade.h
+/home/workspace/cpp-capstone/TradingGame/src/trade.h
 
 /home/workspace/cpp-capstone/TradingGame/src/game.h
 SDL2/SDL.h
@@ -50,24 +48,6 @@ renderer.h
 controller.h
 /home/workspace/cpp-capstone/TradingGame/src/controller.h
 
-/home/workspace/cpp-capstone/TradingGame/src/main.cpp
-iostream
--
-renderer.h
-/home/workspace/cpp-capstone/TradingGame/src/renderer.h
-controller.h
-/home/workspace/cpp-capstone/TradingGame/src/controller.h
-game.h
-/home/workspace/cpp-capstone/TradingGame/src/game.h
-
-/home/workspace/cpp-capstone/TradingGame/src/renderer.cpp
-renderer.h
-/home/workspace/cpp-capstone/TradingGame/src/renderer.h
-iostream
--
-cmath
--
-
 /home/workspace/cpp-capstone/TradingGame/src/renderer.h
 SDL2/SDL.h
 -
@@ -76,5 +56,9 @@ dataframe.h
 tradelog.h
 /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 
+/home/workspace/cpp-capstone/TradingGame/src/trade.h
+
 /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
+trade.h
+/home/workspace/cpp-capstone/TradingGame/src/trade.h
 

@@ -24,6 +24,7 @@ CMakeFiles/TradingGame.dir/src/game.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/game.cpp
  /home/workspace/cpp-capstone/TradingGame/src/game.h
  /home/workspace/cpp-capstone/TradingGame/src/renderer.h
+ /home/workspace/cpp-capstone/TradingGame/src/trade.h
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 CMakeFiles/TradingGame.dir/src/main.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/controller.h
@@ -33,6 +34,7 @@ CMakeFiles/TradingGame.dir/src/main.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/game.h
  /home/workspace/cpp-capstone/TradingGame/src/main.cpp
  /home/workspace/cpp-capstone/TradingGame/src/renderer.h
+ /home/workspace/cpp-capstone/TradingGame/src/trade.h
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 CMakeFiles/TradingGame.dir/src/renderer.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/databar.h
@@ -40,7 +42,9 @@ CMakeFiles/TradingGame.dir/src/renderer.cpp.o
  /home/workspace/cpp-capstone/TradingGame/src/dataparser.h
  /home/workspace/cpp-capstone/TradingGame/src/renderer.cpp
  /home/workspace/cpp-capstone/TradingGame/src/renderer.h
+ /home/workspace/cpp-capstone/TradingGame/src/trade.h
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
 CMakeFiles/TradingGame.dir/src/tradelog.cpp.o
+ /home/workspace/cpp-capstone/TradingGame/src/trade.h
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp
  /home/workspace/cpp-capstone/TradingGame/src/tradelog.h
