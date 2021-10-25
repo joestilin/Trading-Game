@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/TradingGame.dir/src/dataframe.cpp.o"
   "CMakeFiles/TradingGame.dir/src/databar.cpp.o"
   "CMakeFiles/TradingGame.dir/src/dataparser.cpp.o"
+  "CMakeFiles/TradingGame.dir/src/trade.cpp.o"
   "TradingGame.pdb"
   "TradingGame"
 )

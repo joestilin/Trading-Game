@@ -11,6 +11,8 @@ public:
     double entry_price;
     double exit_price;
     double amount;
+    double shares{1};
+    double profit;
     Direction direction;
 
 };

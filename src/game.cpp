@@ -2,6 +2,7 @@
 #include "game.h"
 #include <SDL2/SDL.h>
 #include "trade.h"
+#include <iostream>
 
 
 Game::Game() {
@@ -19,33 +20,53 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
     // game loop
     while (running) {
         scrolling = false;
-        buying = false;
-        selling = false;
-        controller.HandleInput(running, scrolling, buying, selling);
+        action = Action::HOLD;
+        controller.HandleInput(running, scrolling, action);
         Update(renderer, tradelog);
         renderer.Render(dataframe, tradelog, scrolling);
         SDL_Delay(10);
+        std::cout << tradelog.balance << "\n";
     }
 
 }
 
 void Game::Update(Renderer &renderer, TradeLog &tradelog) {
+    Trade trade;
     if (scrolling) {
         scroll_position++;
     }
-    if (buying) {
         switch(tradelog.current_position) {
             case FLAT:
-                Trade trade;
                 trade.entry_price = dataframe.data[renderer.bars_displayed].close;
-                trade.direction = Direction::LONG;
+                switch (action) {
+                    case BUY:
+                        trade.direction = Direction::LONG;
+                        tradelog.current_position = Direction::LONG;
+                    case SELL:
+                        trade.direction = Direction::SHORT;
+                        tradelog.current_position = Direction:: LONG;
+                }
+                
             case SHORT:
-                // TODO close out the current short position.
-        }
-    }
-        
-    if (selling) {
-        // TODO: close trade if long, create new trade if short
-
-    }
+                switch (action) {
+                    case BUY:
+                        trade.exit_price = dataframe.data[renderer.bars_displayed].close;
+                        trade.profit = trade.shares * (trade.exit_price - trade.entry_price);
+                        tradelog.balance += trade.profit;
+                        tradelog.current_position = Direction::FLAT;
+                    case SELL:
+                        return;
+                }
+            
+            case LONG:
+                switch(action) {
+                    case BUY:
+                        return;
+                    case SELL:
+                        trade.exit_price = dataframe.data[renderer.bars_displayed].close;
+                        trade.profit = trade.shares * (trade.entry_price - trade.exit_price);
+                        tradelog.balance += trade.profit;
+                        tradelog.current_position = Direction::FLAT;
+                }
+        }   
 }

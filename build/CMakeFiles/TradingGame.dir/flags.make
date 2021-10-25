@@ -6,5 +6,5 @@ CXX_FLAGS = -std=c++17 -g   -std=c++17 -std=gnu++1z
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/SDL2 -I/home/workspace/cpp-capstone/TradingGame/src 
+CXX_INCLUDES = -I/usr/include/SDL2 -I/home/workspace/cpp-capstone/TradingGame/include -I/home/workspace/cpp-capstone/TradingGame/src 
 

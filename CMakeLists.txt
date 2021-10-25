@@ -12,11 +12,11 @@ project(SDL2Test)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS} src)
+include_directories(${SDL2_INCLUDE_DIRS} include src)
 
 add_executable(TradingGame src/main.cpp src/game.cpp src/renderer.cpp 
                            src/controller.cpp src/tradelog.cpp src/dataframe.cpp 
-                           src/databar.cpp src/dataparser.cpp) 
+                           src/databar.cpp src/dataparser.cpp src/trade.cpp) 
                            
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 target_link_libraries(TradingGame ${SDL2_LIBRARIES})

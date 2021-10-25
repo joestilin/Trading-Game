@@ -1,8 +1,6 @@
 #include "trade.h"
 
-class Trade {
+Trade::Trade() { }
 
-    public: 
-        Trade(){ };
 
-};
+

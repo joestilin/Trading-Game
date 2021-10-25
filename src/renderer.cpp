@@ -46,6 +46,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
      UpdateXScale(dataframe);
 
+     DisplayBalance(tradelog);
+
      
      // draw
      
@@ -65,7 +67,6 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
         // candle body position and dimensions
          x = bar_width * bar_number + bar_gap + x_offset;
-         // y = screen_height - x_scale * (std::max(bar.open, bar.close) - dataframe.data[bars_displayed - 1].min_low);
          y = 0.5 * screen_height + y_scale * (dataframe.data[bars_displayed - 1].sma - std::max(bar.open, bar.close));
          
 
@@ -81,7 +82,6 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
          
         // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
-        // y = screen_height - x_scale * (std::max(bar.high, bar.low) - dataframe.data[bars_displayed - 1].min_low);
         y = 0.5 * screen_height + y_scale * (dataframe.data[bars_displayed - 1].sma - std::max(bar.high, bar.low));
 
         if (x >= left_margin && y >= top_margin) {
@@ -141,6 +141,18 @@ void Renderer::SetCandleStickColor(DataBar const &bar) {
          else {
              SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
          }
+}
+
+void Renderer::DrawCandleBody(DataFrame const &dataframe) {
+
+}
+
+void Renderer::DrawCandleWick(DataFrame const &dataframe) {
+
+}
+
+void Renderer::DisplayBalance(TradeLog const &tradelog) {
+
 }
 
     

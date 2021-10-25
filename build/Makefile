@@ -312,6 +312,33 @@ src/renderer.cpp.s:
 	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/renderer.cpp.s
 .PHONY : src/renderer.cpp.s
 
+src/trade.o: src/trade.cpp.o
+
+.PHONY : src/trade.o
+
+# target to build an object file
+src/trade.cpp.o:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/trade.cpp.o
+.PHONY : src/trade.cpp.o
+
+src/trade.i: src/trade.cpp.i
+
+.PHONY : src/trade.i
+
+# target to preprocess a source file
+src/trade.cpp.i:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/trade.cpp.i
+.PHONY : src/trade.cpp.i
+
+src/trade.s: src/trade.cpp.s
+
+.PHONY : src/trade.s
+
+# target to generate assembly for a file
+src/trade.cpp.s:
+	$(MAKE) -f CMakeFiles/TradingGame.dir/build.make CMakeFiles/TradingGame.dir/src/trade.cpp.s
+.PHONY : src/trade.cpp.s
+
 src/tradelog.o: src/tradelog.cpp.o
 
 .PHONY : src/tradelog.o
@@ -369,6 +396,9 @@ help:
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"
+	@echo "... src/trade.o"
+	@echo "... src/trade.i"
+	@echo "... src/trade.s"
 	@echo "... src/tradelog.o"
 	@echo "... src/tradelog.i"
 	@echo "... src/tradelog.s"

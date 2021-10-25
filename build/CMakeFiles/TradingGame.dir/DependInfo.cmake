@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/workspace/cpp-capstone/TradingGame/src/game.cpp" "/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir/src/game.cpp.o"
   "/home/workspace/cpp-capstone/TradingGame/src/main.cpp" "/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir/src/main.cpp.o"
   "/home/workspace/cpp-capstone/TradingGame/src/renderer.cpp" "/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir/src/renderer.cpp.o"
+  "/home/workspace/cpp-capstone/TradingGame/src/trade.cpp" "/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir/src/trade.cpp.o"
   "/home/workspace/cpp-capstone/TradingGame/src/tradelog.cpp" "/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir/src/tradelog.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
@@ -18,6 +19,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/SDL2"
+  "../include"
   "../src"
   )
 

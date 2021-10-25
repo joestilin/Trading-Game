@@ -6,8 +6,7 @@
 #include "tradelog.h"
 #include "renderer.h"
 #include "controller.h"
-
-enum Action {BUY, SELL};
+#include "trade.h"
 
 class Game {
     public:

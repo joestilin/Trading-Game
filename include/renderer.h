@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <SDL2/SDL.h>
+//#include <SDL2/SDL_ttf.h>
 #include "dataframe.h"
 #include "tradelog.h"
 
@@ -24,6 +25,9 @@ class Renderer {
         void UpdateXScale(DataFrame const &dataframe);
         void SetCandleStickColor(DataBar const &bar);
         void UpdateBarsDisplayed(DataFrame const &dataframe);
+        void DrawCandleBody(DataFrame const &dataframe);
+        void DrawCandleWick(DataFrame const &dataframe);
+        void DisplayBalance(TradeLog const &tradelog);
 
         SDL_Window *sdl_window;
         SDL_Renderer *sdl_renderer;
