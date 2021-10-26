@@ -64,6 +64,9 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      for (auto &bar : dataframe.data) {
 
          SetCandleStickColor(bar);
+         if (bar_number == bars_displayed - 1) {
+             SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF);
+         }
 
         // candle body position and dimensions
          x = bar_width * bar_number + bar_gap + x_offset;

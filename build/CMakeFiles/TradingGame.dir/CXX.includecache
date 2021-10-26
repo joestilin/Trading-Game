@@ -58,20 +58,6 @@ vector
 trade.h
 ../include/trade.h
 
-/home/workspace/cpp-capstone/TradingGame/src/controller.cpp
-controller.h
-/home/workspace/cpp-capstone/TradingGame/src/controller.h
-
-/home/workspace/cpp-capstone/TradingGame/src/game.cpp
-game.h
-/home/workspace/cpp-capstone/TradingGame/src/game.h
-SDL2/SDL.h
--
-trade.h
-/home/workspace/cpp-capstone/TradingGame/src/trade.h
-iostream
--
-
 /home/workspace/cpp-capstone/TradingGame/src/main.cpp
 iostream
 -

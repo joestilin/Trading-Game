@@ -12,9 +12,14 @@ class Game {
     public:
         Game();
         void Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration);
-        void Update(Renderer &renderer, TradeLog &tradelog);
+        void Update(Renderer &renderer);
 
     private:
+
+        void OpenTrade(Renderer &renderer);
+        void CloseLongTrade(Renderer &renderer);
+        void CloseShortTrade(Renderer &renderer);
+
         DataFrame dataframe;
         TradeLog tradelog;
 
