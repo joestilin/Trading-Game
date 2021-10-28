@@ -23,6 +23,7 @@ class Renderer {
         void UpdateScrolling(bool const &scrolling);
         void ClearScreen();
         void UpdateXScale(DataFrame const &dataframe);
+        void UpdateYScale(DataFrame const &dataframe);
         void SetCandleStickColor(DataBar const &bar);
         void UpdateBarsDisplayed(DataFrame const &dataframe);
         void DrawCandleBody(DataFrame const &dataframe);
@@ -47,7 +48,7 @@ class Renderer {
         int bar_width;
         int bar_gap{5};
         double x_scale;             // pixels per data unit
-        double y_scale{200};
+        double y_scale;
 
 };
 #endif

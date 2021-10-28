@@ -17,11 +17,13 @@ class DataFrame {
         double max_high;
         double min_low;
         std::size_t n_bars;
+        double volatility;
         
     private:
         void CalculateExtremes();
         void CalculateRollingMax(int window);
         void CalculateSMA(int window);
+        void CalculateVolatility();
         DataParser parser;
 
 

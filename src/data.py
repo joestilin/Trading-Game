@@ -16,7 +16,7 @@ def get_financial_data(ticker, days_back, time_interval):
 
 symbol = sys.argv[1]
 interval = sys.argv[2]
-data = get_financial_data(symbol, 208, interval)
+data = get_financial_data(symbol, 730, interval)
 #close_data = data.iloc[:, 0].values
 pd.DataFrame(data).to_csv("/home/workspace/cpp-capstone/TradingGame/data/Data.csv")
 #print(close_data)

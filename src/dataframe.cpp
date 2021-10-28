@@ -1,5 +1,6 @@
 #include "dataframe.h"
 #include <iostream>
+#include <cmath>
 
 DataFrame::DataFrame() { }
 
@@ -9,6 +10,8 @@ void DataFrame::LoadData() {
     CalculateExtremes();
     CalculateRollingMax(25);
     CalculateSMA(100);
+    CalculateVolatility();
+    std::cout << volatility << "\n";
 }
 
 void DataFrame::PrintData() {
@@ -79,4 +82,22 @@ void DataFrame::CalculateSMA(int window) {
         }
 
     }
+}
+
+void DataFrame::CalculateVolatility() {
+    double sum = 0;
+    double mean = 0;
+    double sum_squares = 0;
+
+    for (auto &bar : data) {
+        sum += bar.close;
+    }
+
+    mean = sum / n_bars;
+
+    for (auto &bar : data) {
+        sum_squares += std::pow(bar.close - mean, 2);
+    }
+
+    volatility = std::pow(sum_squares / n_bars, 0.5);
 }

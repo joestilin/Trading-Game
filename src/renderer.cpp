@@ -44,7 +44,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      
      UpdateBarsDisplayed(dataframe);
 
-     UpdateXScale(dataframe);
+     UpdateYScale(dataframe);
 
      DisplayBalance(tradelog);
 
@@ -130,6 +130,10 @@ void Renderer::UpdateXScale(DataFrame const &dataframe) {
     x_scale = (screen_height - top_margin - bottom_margin) / 
                 (dataframe.data[bars_displayed - 1].rolling_high - dataframe.data[bars_displayed - 1].rolling_low);
 
+}
+
+void Renderer::UpdateYScale(DataFrame const &dataframe) {
+    y_scale = screen_height / dataframe.volatility;
 }
 
 void Renderer::UpdateBarsDisplayed(DataFrame const &dataframe) {
