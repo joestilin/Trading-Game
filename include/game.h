@@ -12,19 +12,18 @@ class Game {
     public:
         Game();
         void Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration);
-        void Update(Renderer &renderer);
+        void Update();
 
     private:
-
-        void OpenTrade(Renderer &renderer);
-        void CloseLongTrade(Renderer &renderer);
-        void CloseShortTrade(Renderer &renderer);
+        void OpenTrade();
+        void CloseLongTrade();
+        void CloseShortTrade();
 
         DataFrame dataframe;
         TradeLog tradelog;
 
-        // Percentage of maximum scroll
         std::size_t scroll_position = 10;
+        std::size_t current_bar{10};
         bool running = true;
         Action action;
         bool scrolling = false;

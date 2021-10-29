@@ -14,49 +14,73 @@ Game::Game() {
 
 void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration) {
 
-    // a test
-    // dataframe.PrintData();
+    // timing
+    Uint32 title_timestamp = SDL_GetTicks();
+    Uint32 frame_start;
+    Uint32 frame_end;
+    Uint32 frame_duration;
+    int frame_count = 0;
 
     // game loop
     while (running) {
+        frame_start = SDL_GetTicks();
+
         scrolling = false;
         action = Action::HOLD;
         controller.HandleInput(running, scrolling, action);
-        
-        Update(renderer);
-        renderer.Render(dataframe, tradelog, scrolling);
+        Update();
+        renderer.Render(dataframe, tradelog, current_bar);
         if (action == Action::BUY) {
             std::cout << tradelog.balance << " " << tradelog.trades.size() << "\n";
         }
         if (action == Action::SELL) {
             std::cout << tradelog.balance << " " << tradelog.trades.size() << "\n";
         }
-        SDL_Delay(10);
+        
+        frame_end = SDL_GetTicks();
+        frame_count++;
+        frame_duration = frame_end - frame_start;
+
+        // calculate frames per second
+        if (frame_end - title_timestamp > 1000) {
+            renderer.UpdateWindow_Title(frame_count);
+            frame_count = 0;
+            title_timestamp = frame_end;
+        }
+
+        // throttle the loop to target frame rate
+        if (frame_duration < target_frame_duration) {
+            SDL_Delay(target_frame_duration - frame_duration);
+        }
+
+
     }
 }
 
-void Game::Update(Renderer &renderer) {
+void Game::Update() {
     if (scrolling) {
-        scroll_position++;
+        // current_bar = std::max(current_bar++, dataframe.n_bars);
+        current_bar++;
     }
+
     if (action != HOLD){
         switch(tradelog.current_position) { 
             case FLAT:
-                OpenTrade(renderer);
+                OpenTrade();
                 break;
             case SHORT:
-                CloseShortTrade(renderer);
+                CloseShortTrade();
                 break;
             case LONG:
-                CloseLongTrade(renderer);
+                CloseLongTrade();
                 break;
         }
     }   
 }
 
-void Game::OpenTrade(Renderer &renderer) {
+void Game::OpenTrade() {
     Trade trade;
-    trade.entry_price = dataframe.data[renderer.bars_displayed].close;
+    trade.entry_price = dataframe.data[current_bar].close;
     switch (action) {
         case BUY:
             trade.direction = Direction::LONG;
@@ -70,11 +94,11 @@ void Game::OpenTrade(Renderer &renderer) {
     tradelog.trades.push_back(trade);
 }
 
-void Game::CloseShortTrade(Renderer &renderer) {
+void Game::CloseShortTrade() {
     Trade& trade = tradelog.trades[0];
         switch (action) {
             case BUY:
-                trade.exit_price = dataframe.data[renderer.bars_displayed].close;
+                trade.exit_price = dataframe.data[current_bar].close;
                 trade.profit = trade.shares * (trade.entry_price - trade.exit_price);
                 tradelog.balance += trade.profit;
                 tradelog.current_position = Direction::FLAT;
@@ -85,14 +109,14 @@ void Game::CloseShortTrade(Renderer &renderer) {
         }
 }
 
-void Game::CloseLongTrade(Renderer &renderer) {
+void Game::CloseLongTrade() {
     Trade& trade = tradelog.trades[0];
     switch(action) {
         case BUY:
             // do nothing if already long and trying to buy
             break;
         case SELL:
-            trade.exit_price = dataframe.data[renderer.bars_displayed].close;
+            trade.exit_price = dataframe.data[current_bar].close;
             trade.profit = trade.shares * (trade.exit_price - trade.entry_price);
             tradelog.balance += trade.profit;
             tradelog.current_position = Direction::FLAT;

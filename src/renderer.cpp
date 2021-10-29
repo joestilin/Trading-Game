@@ -35,14 +35,12 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
  }
 
- void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, bool const &scrolling) {
+ void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
 
     
-     UpdateScrolling(scrolling);
+     UpdateXOffset(current_bar);
 
      ClearScreen();
-     
-     UpdateBarsDisplayed(dataframe);
 
      UpdateYScale(dataframe);
 
@@ -64,13 +62,13 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      for (auto &bar : dataframe.data) {
 
          SetCandleStickColor(bar);
-         if (bar_number == bars_displayed - 1) {
+         if (bar_number == current_bar) {
              SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF);
          }
 
         // candle body position and dimensions
          x = bar_width * bar_number + bar_gap + x_offset;
-         y = 0.5 * screen_height + y_scale * (dataframe.data[bars_displayed - 1].sma - std::max(bar.open, bar.close));
+         y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
          
 
          if (x >= left_margin && y >= top_margin) {
@@ -85,7 +83,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
          
         // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
-        y = 0.5 * screen_height + y_scale * (dataframe.data[bars_displayed - 1].sma - std::max(bar.high, bar.low));
+        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.high, bar.low));
 
         if (x >= left_margin && y >= top_margin) {
             block.x = x;
@@ -105,20 +103,26 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
  }
 
+void Renderer::UpdateWindow_Title(int const &fps) {
+    std::string title{"FPS " + std::to_string(fps)};
+    SDL_SetWindowTitle(sdl_window, title.c_str());
+
+}
+
 Renderer::~Renderer() { 
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
 }
 
 
+
 void Renderer::InitializeDisplay() {
     bar_width = (screen_width - left_margin - right_margin) / max_bars_displayed;
 }
 
-void Renderer::UpdateScrolling(bool const &scrolling) {
-    if (scrolling) {
-        x_offset -= scroll_speed;
-    }
+void Renderer::UpdateXOffset(size_t const &current_bar) {
+    x_offset = screen_width - right_margin - current_bar * bar_width;
+    
 }
 
 void Renderer::ClearScreen() {
@@ -126,18 +130,8 @@ void Renderer::ClearScreen() {
     SDL_RenderClear(sdl_renderer);
 }
 
-void Renderer::UpdateXScale(DataFrame const &dataframe) {
-    x_scale = (screen_height - top_margin - bottom_margin) / 
-                (dataframe.data[bars_displayed - 1].rolling_high - dataframe.data[bars_displayed - 1].rolling_low);
-
-}
-
 void Renderer::UpdateYScale(DataFrame const &dataframe) {
     y_scale = screen_height / dataframe.volatility;
-}
-
-void Renderer::UpdateBarsDisplayed(DataFrame const &dataframe) {
-    bars_displayed = std::min((screen_width - x_offset) / bar_width,  dataframe.n_bars);
 }
 
 void Renderer::SetCandleStickColor(DataBar const &bar) {

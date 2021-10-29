@@ -1,3 +1,0 @@
-/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/rebuild_cache.dir
-/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/TradingGame.dir
-/home/workspace/cpp-capstone/TradingGame/build/CMakeFiles/edit_cache.dir

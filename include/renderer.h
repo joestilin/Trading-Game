@@ -12,20 +12,17 @@ class Renderer {
         ~Renderer();
 
         void Render(DataFrame const &dataframe, TradeLog const &tradelog, 
-                    bool const &scrolling);
+                    size_t const &current_bar);
 
-        int bars_displayed;
-
+        void UpdateWindow_Title(int const &fps);
 
     private:
 
         void InitializeDisplay();
-        void UpdateScrolling(bool const &scrolling);
+        void UpdateXOffset(size_t const &current_bar);
         void ClearScreen();
-        void UpdateXScale(DataFrame const &dataframe);
         void UpdateYScale(DataFrame const &dataframe);
         void SetCandleStickColor(DataBar const &bar);
-        void UpdateBarsDisplayed(DataFrame const &dataframe);
         void DrawCandleBody(DataFrame const &dataframe);
         void DrawCandleWick(DataFrame const &dataframe);
         void DisplayBalance(TradeLog const &tradelog);
