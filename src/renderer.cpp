@@ -45,58 +45,22 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      UpdateYScale(dataframe);
 
      DisplayBalance(tradelog);
-
-     
-     // draw
      
      int bar_number = 0;
-     int x = 0;
-     int y = 0;
 
-     SDL_Rect block;
-     block.x = 0;
-     block.y = 0;
-     block.w = 0;
-     block.h = 0;
-
+     // draw the bars in the dataset
      for (auto &bar : dataframe.data) {
 
-         SetCandleStickColor(bar);
-         if (bar_number == current_bar) {
-             SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF);
-         }
+         SetCandleStickColor(bar, current_bar, bar_number);
 
-        // candle body position and dimensions
-         x = bar_width * bar_number + bar_gap + x_offset;
-         y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
-         
-
-         if (x >= left_margin && y >= top_margin) {
-            block.x = x;
-            block.y = y;
-            block.h = std::abs(bar.open - bar.close)*y_scale;
-            block.w = bar_width - bar_gap;
-         }
-
-         // Draw the candle
-        SDL_RenderFillRect(sdl_renderer, &block);
-         
-        // wick body position and dimensions
-        x = bar_width * bar_number + bar_gap + bar_width / 2 - 1 + x_offset;
-        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.high, bar.low));
-
-        if (x >= left_margin && y >= top_margin) {
-            block.x = x;
-            block.y = y;
-            block.h = std::abs(bar.high - bar.low)*y_scale;
-            block.w = 1;
-        }
-
-        // Draw the wick
-        SDL_RenderFillRect(sdl_renderer, &block);
+         DrawCandle(bar, bar_number, current_bar, dataframe);
         
-        bar_number++;   
+        bar_number++;
      }
+
+    if (tradelog.trades.size() > 0 && tradelog.trades.back().status == Status::OPEN) {
+        DrawOpenTradeLine(dataframe, tradelog, current_bar);
+    }
 
      // update screen
      SDL_RenderPresent(sdl_renderer);
@@ -114,15 +78,12 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-
-
 void Renderer::InitializeDisplay() {
     bar_width = (screen_width - left_margin - right_margin) / max_bars_displayed;
 }
 
 void Renderer::UpdateXOffset(size_t const &current_bar) {
     x_offset = screen_width - right_margin - current_bar * bar_width;
-    
 }
 
 void Renderer::ClearScreen() {
@@ -134,25 +95,82 @@ void Renderer::UpdateYScale(DataFrame const &dataframe) {
     y_scale = screen_height / dataframe.volatility;
 }
 
-void Renderer::SetCandleStickColor(DataBar const &bar) {
+void Renderer::SetCandleStickColor(DataBar const &bar, size_t const &current_bar, int bar_number) {
     // set candlestick color
-         if (bar.close >= bar.open) {
-             SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
-         }
-         else {
-             SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-         }
+    if (bar.close >= bar.open) {
+        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    }
+    else {
+        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+    }
+    if (bar_number == current_bar) {
+        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF);
+    }
 }
 
-void Renderer::DrawCandleBody(DataFrame const &dataframe) {
+void Renderer::DrawCandle(DataBar const &bar, int const &bar_number, 
+                                size_t const &current_bar, DataFrame const &dataframe) {
+    int x = 0;
+    int y = 0;
 
+    SDL_Rect block;
+    block.x = 0;
+    block.y = 0;
+    block.w = 0;
+    block.h = 0;
+
+    // candle body position and dimensions
+    x = bar_width * bar_number + bar_gap + x_offset;
+    y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
+         
+
+    if (x >= left_margin && y >= top_margin) {
+        block.x = x;
+        block.y = y;
+        block.h = std::abs(bar.open - bar.close)*y_scale;
+        block.w = bar_width - bar_gap;
+    }
+    // Draw the candle
+    SDL_RenderFillRect(sdl_renderer, &block);
+
+    // wick body position and dimensions
+        x = bar_width * bar_number + bar_gap + bar_width / 2 - wick_width + x_offset;
+        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.high, bar.low));
+
+        if (x >= left_margin && y >= top_margin) {
+            block.x = x;
+            block.y = y;
+            block.h = std::abs(bar.high - bar.low)*y_scale;
+            block.w = wick_width;
+        }
+
+    // Draw the wick
+    SDL_RenderFillRect(sdl_renderer, &block);
 }
 
-void Renderer::DrawCandleWick(DataFrame const &dataframe) {
+void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
+    // Draw open trade line
+    // endpoints of the line
+    double x1 = tradelog.trades.back().index * bar_width + bar_gap + x_offset;
+    double y1 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - tradelog.trades.back().entry_price);
+    double x2 = current_bar * bar_width + bar_gap + x_offset;
+    double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - dataframe.data[current_bar].close);
+    
+    if (y1 >= y2) {
+        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    }
+    else {
+        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+    }
 
+    SDL_RenderDrawLine(sdl_renderer, x1, y1, x2, y2);
 }
 
 void Renderer::DisplayBalance(TradeLog const &tradelog) {
+
+}
+
+void Renderer::DisplayTradeBox() {
 
 }
 

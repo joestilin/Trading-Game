@@ -52,15 +52,18 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
         if (frame_duration < target_frame_duration) {
             SDL_Delay(target_frame_duration - frame_duration);
         }
-
-
     }
 }
 
 void Game::Update() {
-    if (scrolling) {
+    //if (scrolling) {
         // current_bar = std::max(current_bar++, dataframe.n_bars);
         current_bar++;
+    //}
+
+    // end the game when scrolling reaches the last bar in the dataset
+    if (current_bar == dataframe.n_bars) {
+        running = false;
     }
 
     if (action != HOLD){
@@ -84,10 +87,14 @@ void Game::OpenTrade() {
     switch (action) {
         case BUY:
             trade.direction = Direction::LONG;
+            trade.index = current_bar;
+            trade.status = Status::OPEN;
             tradelog.current_position = Direction::LONG;
             break;
         case SELL:
             trade.direction = Direction::SHORT;
+            trade.index = current_bar;
+            trade.status = Status::OPEN;
             tradelog.current_position = Direction::SHORT;
             break;
     }
@@ -95,11 +102,12 @@ void Game::OpenTrade() {
 }
 
 void Game::CloseShortTrade() {
-    Trade& trade = tradelog.trades[0];
+    Trade& trade = tradelog.trades.back();
         switch (action) {
             case BUY:
                 trade.exit_price = dataframe.data[current_bar].close;
                 trade.profit = trade.shares * (trade.entry_price - trade.exit_price);
+                trade.status = Status::CLOSED;
                 tradelog.balance += trade.profit;
                 tradelog.current_position = Direction::FLAT;
                 break;
@@ -110,7 +118,7 @@ void Game::CloseShortTrade() {
 }
 
 void Game::CloseLongTrade() {
-    Trade& trade = tradelog.trades[0];
+    Trade& trade = tradelog.trades.back();
     switch(action) {
         case BUY:
             // do nothing if already long and trying to buy
@@ -118,6 +126,7 @@ void Game::CloseLongTrade() {
         case SELL:
             trade.exit_price = dataframe.data[current_bar].close;
             trade.profit = trade.shares * (trade.exit_price - trade.entry_price);
+            trade.status = Status::CLOSED;
             tradelog.balance += trade.profit;
             tradelog.current_position = Direction::FLAT;
         break;

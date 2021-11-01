@@ -3,6 +3,7 @@
 
 
 enum Direction {FLAT, LONG, SHORT};
+enum Status {OPEN, CLOSED};
 
 class Trade {
 public:
@@ -13,6 +14,8 @@ public:
     double amount;
     double shares{100};
     double profit;
+    Status status;
+    int index;
     Direction direction;
 
 };

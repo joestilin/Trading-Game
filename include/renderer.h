@@ -22,10 +22,15 @@ class Renderer {
         void UpdateXOffset(size_t const &current_bar);
         void ClearScreen();
         void UpdateYScale(DataFrame const &dataframe);
-        void SetCandleStickColor(DataBar const &bar);
-        void DrawCandleBody(DataFrame const &dataframe);
+        void MapX();
+        void MapY();
+        void SetCandleStickColor(DataBar const &bar, size_t const &current_bar, int bar_number);
+        void DrawCandle(DataBar const &bar, int const &bar_number, 
+                        size_t const &current_bar, DataFrame const &dataframe);
         void DrawCandleWick(DataFrame const &dataframe);
+        void DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar);
         void DisplayBalance(TradeLog const &tradelog);
+        void DisplayTradeBox();
 
         SDL_Window *sdl_window;
         SDL_Renderer *sdl_renderer;
@@ -34,8 +39,8 @@ class Renderer {
         const std::size_t screen_height;
 
         // Chart display variables
-        int scroll_speed{50};       // pixels / frame
-        int x_offset{1200};          // pixels
+        
+        int x_offset;               // pixels
         int y_offset{0};            // pixels
         int max_bars_displayed{100};
         int top_margin{10};
@@ -43,6 +48,7 @@ class Renderer {
         int right_margin{10};
         int left_margin{10};
         int bar_width;
+        int wick_width{1};
         int bar_gap{5};
         double x_scale;             // pixels per data unit
         double y_scale;

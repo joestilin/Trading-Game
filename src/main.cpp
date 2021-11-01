@@ -9,7 +9,6 @@
 int main () {
     std::cout << "Welcome the Trading Game. \nGood Luck!" << std::endl;
 
-
     // For now, input data is hardcoded; will be changed in the future
     // call python script to grab finanical data
     std::string data_reader_file = "/home/workspace/cpp-capstone/TradingGame/src/data.py";
@@ -19,7 +18,7 @@ int main () {
     command += data_reader_file + arg1 + arg2;
     system(command.c_str());
 
-    std::size_t kFramesPerSecond{60};
+    std::size_t kFramesPerSecond{30};
     std::size_t kMsPerFrame = 1000 / kFramesPerSecond;
     std::size_t kScreenWidth = 1280;
     std::size_t kScreenHeight = 640;
@@ -29,6 +28,8 @@ int main () {
     Game game;
 
     game.Run(controller, renderer, kMsPerFrame);
+
+    std::cout << "Game Over!" << "\n";
 
     
     return 0;
