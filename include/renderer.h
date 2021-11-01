@@ -2,7 +2,7 @@
 #define RENDERER_H
 
 #include <SDL2/SDL.h>
-//#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include "dataframe.h"
 #include "tradelog.h"
 
@@ -34,6 +34,8 @@ class Renderer {
 
         SDL_Window *sdl_window;
         SDL_Renderer *sdl_renderer;
+        SDL_Texture *texture;
+        TTF_Font *font;
 
         const std::size_t screen_width;
         const std::size_t screen_height;

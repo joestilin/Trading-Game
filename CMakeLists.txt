@@ -9,14 +9,16 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
 project(SDL2Test)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
 
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS} include src)
+find_package(SDL2TTF REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS} include src)
 
 add_executable(TradingGame src/main.cpp src/game.cpp src/renderer.cpp 
                            src/controller.cpp src/tradelog.cpp src/dataframe.cpp 
                            src/databar.cpp src/dataparser.cpp src/trade.cpp) 
                            
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(TradingGame ${SDL2_LIBRARIES})
+target_link_libraries(TradingGame ${SDL2_LIBRARIES} ${SDL2TTF_LIBRARY})

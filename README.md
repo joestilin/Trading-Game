@@ -1,5 +1,10 @@
 Gamified stock, ETF, Crypto, and Forex trading
 
+Dependencies
+
+sudo apt-get install libsdl2-dev
+sudo apt-get install libsdl2-ttf-dev
+
 Develelopment Notes / Approach
 
 1. Vertical scale and offset of the chart during gameplay

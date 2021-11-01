@@ -29,10 +29,19 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         std::cerr << "SDL error: " << SDL_GetError() << "\n";
     }
 
+    // initialize TTF
+    if (TTF_Init() < 0) {
+        std::cout << "SDL_TTF could not be initialized: " << TTF_GetError << "\n";
+    }
+
+    font = TTF_OpenFont("font.ttf", 24);
+    if (!font) {
+        std::cout << "Font could not be loaded: " << TTF_GetError << std::endl;
+    }
+
     // initialize display constants
     InitializeDisplay();
     
-
  }
 
  void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
