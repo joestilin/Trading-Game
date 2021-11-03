@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include <iostream>
 #include <cmath>
+#include <string>
 
 Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_height) 
     : screen_width(screen_width), screen_height(screen_height) {
@@ -34,8 +35,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         std::cout << "SDL_TTF could not be initialized: " << TTF_GetError << "\n";
     }
 
-    font = TTF_OpenFont("font.ttf", 24);
-    if (!font) {
+    font = TTF_OpenFont("fonts/Roboto-Bold.ttf", 36);
+    if (font == NULL) {
         std::cout << "Font could not be loaded: " << TTF_GetError << std::endl;
     }
 
@@ -69,6 +70,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
     if (tradelog.trades.size() > 0 && tradelog.trades.back().status == Status::OPEN) {
         DrawOpenTradeLine(dataframe, tradelog, current_bar);
+        DisplayOpenTradeBalance(tradelog);
     }
 
      // update screen
@@ -84,7 +86,10 @@ void Renderer::UpdateWindow_Title(int const &fps) {
 
 Renderer::~Renderer() { 
     SDL_DestroyWindow(sdl_window);
+    TTF_CloseFont(font);
+    SDL_DestroyTexture(text_texture);
     SDL_Quit();
+    TTF_Quit();
 }
 
 void Renderer::InitializeDisplay() {
@@ -176,10 +181,39 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
 }
 
 void Renderer::DisplayBalance(TradeLog const &tradelog) {
+    SDL_Rect box;
 
+    std::string balance_text = "$" + std::to_string(tradelog.balance);
+
+    SDL_Color text_color = {200, 200, 200};
+    SDL_Surface* text_surface = TTF_RenderText_Solid(font, balance_text.c_str(), text_color);
+    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+    box.x = 30;
+    box.y = 30;
+    box.h = text_surface->h;
+    box.w = text_surface->w;
+    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
 }
 
-void Renderer::DisplayTradeBox() {
+void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
+    SDL_Rect box;
+
+    std::string balance_text = "$" + std::to_string(tradelog.trades.back().profit);
+
+    SDL_Color text_color = {200, 200, 200};
+    SDL_Surface* text_surface = TTF_RenderText_Solid(font, balance_text.c_str(), text_color);
+    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+    box.x = 30;
+    box.y = 30;
+    box.h = text_surface->h;
+    box.w = text_surface->w;
+    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
 
 }
 

@@ -19,6 +19,9 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS} include src)
 add_executable(TradingGame src/main.cpp src/game.cpp src/renderer.cpp 
                            src/controller.cpp src/tradelog.cpp src/dataframe.cpp 
                            src/databar.cpp src/dataparser.cpp src/trade.cpp) 
-                           
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/fonts
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 target_link_libraries(TradingGame ${SDL2_LIBRARIES} ${SDL2TTF_LIBRARY})

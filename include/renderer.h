@@ -30,12 +30,12 @@ class Renderer {
         void DrawCandleWick(DataFrame const &dataframe);
         void DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar);
         void DisplayBalance(TradeLog const &tradelog);
-        void DisplayTradeBox();
-
+        void DisplayOpenTradeBalance(TradeLog const &tradelog);
+    
         SDL_Window *sdl_window;
         SDL_Renderer *sdl_renderer;
-        SDL_Texture *texture;
-        TTF_Font *font;
+        SDL_Texture *text_texture;
+        TTF_Font *font = NULL;
 
         const std::size_t screen_width;
         const std::size_t screen_height;
