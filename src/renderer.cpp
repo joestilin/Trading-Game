@@ -206,7 +206,7 @@ void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
     SDL_Color text_color = {200, 200, 200};
     SDL_Surface* text_surface = TTF_RenderText_Solid(font, balance_text.c_str(), text_color);
     text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-    box.x = 30;
+    box.x = 500;
     box.y = 30;
     box.h = text_surface->h;
     box.w = text_surface->w;

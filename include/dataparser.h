@@ -10,6 +10,6 @@ class DataParser {
         void ParseData(std::vector<DataBar> &data);   
 };
 
-const std::string kDataFileName = "/home/workspace/cpp-capstone/TradingGame/data/Data.csv";
+const std::string kDataFileName = "data.csv";
 
 #endif

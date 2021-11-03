@@ -20,8 +20,6 @@ class DataFrame {
         double volatility;
         
     private:
-        void CalculateExtremes();
-        void CalculateRollingMax(int window);
         void CalculateSMA(int window);
         void CalculateVolatility();
         DataParser parser;

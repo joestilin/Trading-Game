@@ -18,5 +18,6 @@ symbol = sys.argv[1]
 interval = sys.argv[2]
 data = get_financial_data(symbol, 730, interval)
 #close_data = data.iloc[:, 0].values
-pd.DataFrame(data).to_csv("/home/workspace/cpp-capstone/TradingGame/data/Data.csv")
+#pd.DataFrame(data).to_csv("/home/workspace/cpp-capstone/TradingGame/data/Data.csv")
+pd.DataFrame(data).to_csv("data.csv")
 #print(close_data)
