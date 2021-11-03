@@ -19,6 +19,8 @@ Players interact with historical price data pulled from Yahoo Finance. Players c
   >Note that for Linux, an `apt` or `apt-get` installation is preferred to building from source.
 * SDL_TTF
   * Run `sudo apt-get install libsdl2-ttf-dev`
+* Yahoo Finance
+  * Run `pip install yfinance`
 * gcc/g++ >= 5.4
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
