@@ -45,6 +45,9 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     
  }
 
+ void Renderer::RenderLobby(){
+ }
+
  void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
 
     
@@ -87,7 +90,7 @@ void Renderer::UpdateWindow_Title(int const &fps) {
 Renderer::~Renderer() { 
     SDL_DestroyWindow(sdl_window);
     TTF_CloseFont(font);
-    SDL_DestroyTexture(text_texture);
+    //SDL_DestroyTexture(text_texture);
     SDL_Quit();
     TTF_Quit();
 }

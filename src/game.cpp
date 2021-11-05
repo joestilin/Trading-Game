@@ -6,10 +6,8 @@
 
 
 Game::Game() {
-
     // create financial dataframe from file
     dataframe.LoadData();
-
 }
 
 void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_frame_duration) {
@@ -27,15 +25,9 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
 
         scrolling = false;
         action = Action::HOLD;
-        controller.HandleInput(running, scrolling, action);
+        controller.HandleInput(running, action);
         Update();
         renderer.Render(dataframe, tradelog, current_bar);
-        if (action == Action::BUY) {
-            std::cout << tradelog.balance << " " << tradelog.trades.size() << "\n";
-        }
-        if (action == Action::SELL) {
-            std::cout << tradelog.balance << " " << tradelog.trades.size() << "\n";
-        }
         
         frame_end = SDL_GetTicks();
         frame_count++;
@@ -56,14 +48,26 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
 }
 
 void Game::Update() {
-    //if (scrolling) {
-        // current_bar = std::max(current_bar++, dataframe.n_bars);
-        current_bar++;
-    //}
+
+    current_bar++;
 
     // end the game when scrolling reaches the last bar in the dataset
     if (current_bar == dataframe.n_bars) {
         running = false;
+    }
+
+    // or when the player's balance reaches zero. 
+    if (tradelog.balance <= 0) {
+        running = false;
+    }
+
+    switch (action) {
+        case HOLD:
+            if (tradelog.trades.size() > 0 && tradelog.trades.back().status == OPEN) {
+                UpdateOpenTradeProfit();
+            }
+            else { }
+            break;
     }
 
     if (action != HOLD){
@@ -79,6 +83,14 @@ void Game::Update() {
                 break;
         }
     }   
+}
+
+double Game::getBalance() {
+    
+}
+
+void Game::setState(bool &state) {
+    running = state;
 }
 
 void Game::OpenTrade() {
@@ -131,4 +143,10 @@ void Game::CloseLongTrade() {
             tradelog.current_position = Direction::FLAT;
         break;
     }
+}
+
+// TODO: switch for short and long cases
+void Game::UpdateOpenTradeProfit() {
+    Trade& trade = tradelog.trades.back();
+    trade.profit = dataframe.data[current_bar].close - trade.entry_price;
 }

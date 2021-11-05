@@ -1,10 +1,10 @@
 #include <iostream>
 #include "renderer.h"
 #include "controller.h"
+#include "lobby.h"
 #include "game.h"
 
 // quantlib.org
-
 
 int main () {
     std::cout << "Welcome the Trading Game. \nGood Luck!" << std::endl;
@@ -13,7 +13,7 @@ int main () {
     // call python script to grab finanical data
     //std::string data_reader_file = "/home/workspace/cpp-capstone/TradingGame/src/data.py";
     std::string data_reader_file = "python/data.py";
-    std::string arg1 = " DAL";
+    std::string arg1 = " GE";
     std::string arg2 = " 1h";
     std::string command = "python3 ";
     command += data_reader_file + arg1 + arg2;
@@ -26,12 +26,15 @@ int main () {
 
     Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
+    Lobby lobby;
     Game game;
-
+    
+    lobby.Run(controller, renderer, kMsPerFrame);
+    bool state = lobby.getState();
+    game.setState(state);
     game.Run(controller, renderer, kMsPerFrame);
 
     std::cout << "Game Over!" << "\n";
-
     
     return 0;
 }

@@ -14,6 +14,8 @@ class Renderer {
         void Render(DataFrame const &dataframe, TradeLog const &tradelog, 
                     size_t const &current_bar);
 
+        void RenderLobby();
+
         void UpdateWindow_Title(int const &fps);
 
     private:

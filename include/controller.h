@@ -9,9 +9,8 @@ class Controller {
 
     public:
         Controller();
-        void HandleInput(bool &running, bool &scrolling, Action &action);
-
+        void HandleInput(bool &running, Action &action);
+        void HandleLobbyInput(bool &running, bool &chose);
 };
-
 
 #endif
