@@ -13,7 +13,7 @@ int main () {
     // call python script to grab finanical data
     //std::string data_reader_file = "/home/workspace/cpp-capstone/TradingGame/src/data.py";
     std::string data_reader_file = "python/data.py";
-    std::string arg1 = " GE";
+    std::string arg1 = " F";
     std::string arg2 = " 1h";
     std::string command = "python3 ";
     command += data_reader_file + arg1 + arg2;

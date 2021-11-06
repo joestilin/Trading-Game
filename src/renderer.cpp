@@ -46,6 +46,26 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
  }
 
  void Renderer::RenderLobby(){
+    ClearScreen();
+    SDL_Rect box;
+
+    std::string text = "Enter a ticker";
+
+    SDL_Color text_color = {200, 200, 200};
+    SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
+    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+    box.x = 520;
+    box.y = 320;
+    box.h = text_surface->h;
+    box.w = text_surface->w;
+    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
+
+    // update screen
+     SDL_RenderPresent(sdl_renderer);
+
  }
 
  void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
