@@ -45,26 +45,33 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     
  }
 
- void Renderer::RenderLobby(){
+ void Renderer::RenderLobby(std::string const &inputText){
     ClearScreen();
-    SDL_Rect box;
-
-    std::string text = "Enter a ticker";
-
+    
     SDL_Color text_color = {200, 200, 200};
-    SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
-    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-    box.x = 520;
-    box.y = 320;
-    box.h = text_surface->h;
-    box.w = text_surface->w;
-    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+    std::string queryText = "Enter a ticker";
+    // render the query text
+    RenderText(queryText, text_color, 520, 320);
 
-    SDL_DestroyTexture(text_texture);
-    SDL_FreeSurface(text_surface);
+    // render user input text
+    RenderText(inputText, text_color, 520, 400);
 
     // update screen
-     SDL_RenderPresent(sdl_renderer);
+    SDL_RenderPresent(sdl_renderer);
+
+ }
+ 
+ void Renderer::RenderText(std::string text, SDL_Color text_color, int x, int y) {
+     SDL_Rect box;
+     SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
+     text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+     box.x = x;
+     box.y = y;
+     box.h = text_surface->h;
+     box.w = text_surface->w;
+     SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+     SDL_DestroyTexture(text_texture);
+     SDL_FreeSurface(text_surface);
 
  }
 

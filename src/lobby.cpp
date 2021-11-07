@@ -11,14 +11,17 @@ void Lobby::Run(Controller &controller, Renderer &renderer, std::size_t &target_
     Uint32 frame_duration;
     int frame_count = 0;
 
-    while (running && !chose) {
+    // enable text input
+    SDL_StartTextInput();
+
+    while (running) {
         frame_start = SDL_GetTicks();
 
-        controller.HandleLobbyInput(running, chose);
+        controller.HandleLobbyInput(running, inputText);
         
         Update();
 
-        renderer.RenderLobby();
+        renderer.RenderLobby(inputText);
         
         frame_end = SDL_GetTicks();
         frame_count++;

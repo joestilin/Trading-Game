@@ -14,12 +14,13 @@ class Renderer {
         void Render(DataFrame const &dataframe, TradeLog const &tradelog, 
                     size_t const &current_bar);
 
-        void RenderLobby();
+        void RenderLobby(std::string const &inputText);
 
         void UpdateWindow_Title(int const &fps);
 
     private:
 
+        void RenderText(std::string text, SDL_Color text_color, int x, int y);
         void InitializeDisplay();
         void UpdateXOffset(size_t const &current_bar);
         void ClearScreen();

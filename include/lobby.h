@@ -15,6 +15,7 @@ class Lobby {
     private:
     bool running = true;
     bool chose = false;
+    std::string inputText = " ";
 };
 
 

@@ -26,11 +26,12 @@ int main () {
 
     Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
-    Lobby lobby;
-    Game game;
     
+    Lobby lobby;
     lobby.Run(controller, renderer, kMsPerFrame);
     bool state = lobby.getState();
+
+    Game game;
     game.setState(state);
     game.Run(controller, renderer, kMsPerFrame);
 
