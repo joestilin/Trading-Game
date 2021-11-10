@@ -12,12 +12,6 @@ int main () {
     // For now, input data is hardcoded; will be changed in the future
     // call python script to grab finanical data
     //std::string data_reader_file = "/home/workspace/cpp-capstone/TradingGame/src/data.py";
-    std::string data_reader_file = "python/data.py";
-    std::string arg1 = " F";
-    std::string arg2 = " 1h";
-    std::string command = "python3 ";
-    command += data_reader_file + arg1 + arg2;
-    system(command.c_str());
 
     std::size_t kFramesPerSecond{30};
     std::size_t kMsPerFrame = 1000 / kFramesPerSecond;

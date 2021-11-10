@@ -75,7 +75,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
  }
 
- void Renderer::Render(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
+ void Renderer::RenderGame(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
 
     
      UpdateXOffset(current_bar);

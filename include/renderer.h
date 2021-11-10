@@ -11,7 +11,7 @@ class Renderer {
         Renderer(const std::size_t screen_width, const std::size_t screen_height);
         ~Renderer();
 
-        void Render(DataFrame const &dataframe, TradeLog const &tradelog, 
+        void RenderGame(DataFrame const &dataframe, TradeLog const &tradelog, 
                     size_t const &current_bar);
 
         void RenderLobby(std::string const &inputText);

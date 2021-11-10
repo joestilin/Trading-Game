@@ -23,7 +23,7 @@ void Controller::HandleInput(bool &running, Action &action) {
     }
 }
 
-void Controller::HandleLobbyInput(bool &running, std::string &inputText) {
+void Controller::HandleLobbyInput(bool &running, bool &selection, std::string &inputText) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
@@ -33,7 +33,7 @@ void Controller::HandleLobbyInput(bool &running, std::string &inputText) {
             case SDL_KEYDOWN:
                 // handle backspace
                 if (e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() >0 ) {
-                    inputText.pop_back();
+                    inputText.pop_back(); 
                     // renderText = true;
                 }
                 // handle copy
@@ -44,6 +44,10 @@ void Controller::HandleLobbyInput(bool &running, std::string &inputText) {
                 else if (e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL) {
                     inputText = SDL_GetClipboardText();
                     // renderText = true;
+                }
+                // handle enter
+                else if (e.key.keysym.sym == SDLK_RETURN) {
+                    selection = true;
                 }
             break;
             //Special text input event

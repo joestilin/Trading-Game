@@ -27,7 +27,7 @@ void Game::Run(Controller &controller, Renderer &renderer, std::size_t target_fr
         action = Action::HOLD;
         controller.HandleInput(running, action);
         Update();
-        renderer.Render(dataframe, tradelog, current_bar);
+        renderer.RenderGame(dataframe, tradelog, current_bar);
         
         frame_end = SDL_GetTicks();
         frame_count++;

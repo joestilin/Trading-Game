@@ -11,7 +11,7 @@ class Controller {
     public:
         Controller();
         void HandleInput(bool &running, Action &action);
-        void HandleLobbyInput(bool &running, std::string &inputText);
+        void HandleLobbyInput(bool &running, bool &selection, std::string &inputText);
 };
 
 #endif
