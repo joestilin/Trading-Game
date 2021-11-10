@@ -6,6 +6,14 @@ This game was developed for the capstone project for Udacity's C++ Nanodegree Pr
 
 Players interact with historical price data pulled from Yahoo Finance. Players can create long and short trade positions in a fast paced scrolling game, with the goal of maximizing their profits.
 
+Currently supported financial symbols include:
+
+8,094 stock symbols listed on NASDAQ, NYSE, and AMEX
+2,506 ETF symbols
+
+Financial symbols resource:
+https://www.nasdaq.com/market-activity/etf/screener
+
 ## Dependencies for running locally
 
 * cmake >= 3.7
