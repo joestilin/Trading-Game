@@ -2,11 +2,11 @@
 #include <iostream>
 
 Lobby::Lobby() { 
-    // load the file of financial symbols into a vector
+    // load the file of financial symbols into the map, symbols
     ParseSymbols();
 }
 
-void Lobby::Run(Controller &controller, Renderer &renderer, std::size_t &target_frame_duration) {
+void Lobby::Run(Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t &target_frame_duration) {
 
      // timing variables
     Uint32 title_timestamp = SDL_GetTicks();
@@ -23,7 +23,7 @@ void Lobby::Run(Controller &controller, Renderer &renderer, std::size_t &target_
 
         controller.HandleLobbyInput(running, selection, inputText);
         
-        Update();
+        Update(currentSymbol);
 
         renderer.RenderLobby(inputText);
         
@@ -44,12 +44,11 @@ void Lobby::Run(Controller &controller, Renderer &renderer, std::size_t &target_
             SDL_Delay(target_frame_duration - frame_duration);
         }
     }
-
 }
 
-void Lobby::Update() {
+void Lobby::Update(Symbol &currentSymbol) {
     if (selection) {
-        if (std::find(symbols.begin(), symbols.end(), inputText) != symbols.end()) {
+        if (symbols.find(inputText) != symbols.end()) {
             std::string data_reader_file = "python/data.py";
             std::string arg1 = " " + inputText;
             std::string arg2 = " 1h";
@@ -57,10 +56,14 @@ void Lobby::Update() {
             command += data_reader_file + arg1 + arg2;
             int error = system(command.c_str());
             std::cout << error << std::endl;
+
+            validSelection = true;
+            currentSymbol = symbols[inputText];
         }
         else {
             std::cout << "Invalid symbol" << std::endl;
             selection = false;
+            inputText = "";
         }
     }
 }
@@ -78,27 +81,26 @@ void Lobby::ParseSymbols() {
     if (stream.is_open()) {
         std::cout << "File opened!" << "\n";
 
-
         while (std::getline(stream, line)) {
             row.clear();
 
             std::istringstream linestream(line);
 
-            DataBar databar;
+            Symbol symbol;
 
             while (linestream.good()) {
                 std::string substr;
                 std::getline(linestream, substr, ',');
                 row.push_back(substr);
             }
-
-            symbols.push_back(row[0]);
+            symbol.symbol = row[0];
+            symbol.name = row[1];
+            symbols[row[0]] = symbol;
         }
 
         stream.close();
     } else {
         std::cout << "Could not open data file" << "\n";
     }
-
 }
 

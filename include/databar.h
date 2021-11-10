@@ -20,6 +20,7 @@ class DataBar {
         double rolling_high;
         double rolling_low;
         double sma;
+        double volatility;
     
     private:
 };

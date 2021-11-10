@@ -16,9 +16,10 @@ find_package(SDL2TTF REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS} include src)
 
-add_executable(TradingGame src/main.cpp src/game.cpp src/renderer.cpp 
+add_executable(TradingGame src/main.cpp src/game.cpp src/chart.cpp src/renderer.cpp 
                            src/controller.cpp src/tradelog.cpp src/dataframe.cpp 
-                           src/databar.cpp src/dataparser.cpp src/trade.cpp src/lobby.cpp) 
+                           src/databar.cpp src/dataparser.cpp src/trade.cpp 
+                           src/symbol.cpp src/lobby.cpp) 
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/fonts
         DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

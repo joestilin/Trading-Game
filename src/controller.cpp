@@ -32,7 +32,7 @@ void Controller::HandleLobbyInput(bool &running, bool &selection, std::string &i
                 break;
             case SDL_KEYDOWN:
                 // handle backspace
-                if (e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() >0 ) {
+                if (e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0 ) {
                     inputText.pop_back(); 
                     // renderText = true;
                 }

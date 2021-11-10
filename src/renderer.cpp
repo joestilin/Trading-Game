@@ -35,7 +35,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         std::cout << "SDL_TTF could not be initialized: " << TTF_GetError << "\n";
     }
 
-    font = TTF_OpenFont("fonts/Roboto-Bold.ttf", 36);
+    font = TTF_OpenFont("fonts/Roboto-Bold.ttf", 18);
     if (font == NULL) {
         std::cout << "Font could not be loaded: " << TTF_GetError << std::endl;
     }
@@ -44,6 +44,14 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     InitializeDisplay();
     
  }
+
+ Renderer::~Renderer() { 
+    SDL_DestroyWindow(sdl_window);
+    TTF_CloseFont(font);
+    //SDL_DestroyTexture(text_texture);
+    SDL_Quit();
+    TTF_Quit();
+}
 
  void Renderer::RenderLobby(std::string const &inputText){
     ClearScreen();
@@ -62,20 +70,25 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
  }
  
  void Renderer::RenderText(std::string text, SDL_Color text_color, int x, int y) {
-     SDL_Rect box;
-     SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
-     text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-     box.x = x;
-     box.y = y;
-     box.h = text_surface->h;
-     box.w = text_surface->w;
-     SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
-     SDL_DestroyTexture(text_texture);
-     SDL_FreeSurface(text_surface);
+
+     // only render text if the string contains characters
+     if (text.length() > 0 ) {
+        SDL_Rect box;
+        SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
+        text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+        box.x = x;
+        box.y = y;
+        box.h = text_surface->h;
+        box.w = text_surface->w;
+        SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+        SDL_DestroyTexture(text_texture);
+        SDL_FreeSurface(text_surface);
+     }
 
  }
 
- void Renderer::RenderGame(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar) {
+ void Renderer::RenderChart(DataFrame const &dataframe, TradeLog const &tradelog, 
+                            size_t const &current_bar, Symbol const &currentSymbol) {
 
     
      UpdateXOffset(current_bar);
@@ -85,6 +98,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      UpdateYScale(dataframe);
 
      DisplayBalance(tradelog);
+
+     DisplaySymbol(currentSymbol);
      
      int bar_number = 0;
 
@@ -112,14 +127,6 @@ void Renderer::UpdateWindow_Title(int const &fps) {
     std::string title{"FPS " + std::to_string(fps)};
     SDL_SetWindowTitle(sdl_window, title.c_str());
 
-}
-
-Renderer::~Renderer() { 
-    SDL_DestroyWindow(sdl_window);
-    TTF_CloseFont(font);
-    //SDL_DestroyTexture(text_texture);
-    SDL_Quit();
-    TTF_Quit();
 }
 
 void Renderer::InitializeDisplay() {
@@ -211,40 +218,23 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
 }
 
 void Renderer::DisplayBalance(TradeLog const &tradelog) {
-    SDL_Rect box;
-
     std::string balance_text = "$" + std::to_string(tradelog.balance);
-
     SDL_Color text_color = {200, 200, 200};
-    SDL_Surface* text_surface = TTF_RenderText_Solid(font, balance_text.c_str(), text_color);
-    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-    box.x = 30;
-    box.y = 30;
-    box.h = text_surface->h;
-    box.w = text_surface->w;
-    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
-
-    SDL_DestroyTexture(text_texture);
-    SDL_FreeSurface(text_surface);
+    RenderText(balance_text, text_color, 30, 30);
 }
 
 void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
-    SDL_Rect box;
-
     std::string balance_text = "$" + std::to_string(tradelog.trades.back().profit);
-
     SDL_Color text_color = {200, 200, 200};
-    SDL_Surface* text_surface = TTF_RenderText_Solid(font, balance_text.c_str(), text_color);
-    text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-    box.x = 500;
-    box.y = 30;
-    box.h = text_surface->h;
-    box.w = text_surface->w;
-    SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
+    RenderText(balance_text, text_color, 500, 30);
+}
 
-    SDL_DestroyTexture(text_texture);
-    SDL_FreeSurface(text_surface);
-
+void Renderer::DisplaySymbol(Symbol const &currentSymbol) {
+    std::string symbol_text = currentSymbol.symbol;
+    std::string name_text = currentSymbol.name;
+    SDL_Color text_color = {200, 200, 200};
+    RenderText(symbol_text, text_color, 750, 30);
+    RenderText(name_text, text_color, 750, 100);
 }
 
     

@@ -5,14 +5,15 @@
 #include <SDL2/SDL_ttf.h>
 #include "dataframe.h"
 #include "tradelog.h"
+#include "symbol.h"
 
 class Renderer {
     public:
         Renderer(const std::size_t screen_width, const std::size_t screen_height);
         ~Renderer();
 
-        void RenderGame(DataFrame const &dataframe, TradeLog const &tradelog, 
-                    size_t const &current_bar);
+        void RenderChart(DataFrame const &dataframe, TradeLog const &tradelog, 
+                    size_t const &current_bar, Symbol const &currentSymbol);
 
         void RenderLobby(std::string const &inputText);
 
@@ -34,6 +35,8 @@ class Renderer {
         void DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar);
         void DisplayBalance(TradeLog const &tradelog);
         void DisplayOpenTradeBalance(TradeLog const &tradelog);
+        void DisplaySymbol(Symbol const &currentSymbol);
+
     
         SDL_Window *sdl_window;
         SDL_Renderer *sdl_renderer;
