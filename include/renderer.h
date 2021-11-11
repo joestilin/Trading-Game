@@ -25,7 +25,7 @@ class Renderer {
         void InitializeDisplay();
         void UpdateXOffset(size_t const &current_bar);
         void ClearScreen();
-        void UpdateYScale(DataFrame const &dataframe);
+        void UpdateYScale(DataFrame const &dataframe, std::size_t const &current_bar);
         void MapX();
         void MapY();
         void SetCandleStickColor(DataBar const &bar, size_t const &current_bar, int bar_number);

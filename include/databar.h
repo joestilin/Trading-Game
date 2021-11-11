@@ -15,8 +15,6 @@ class DataBar {
         double high;
         double low;
         double close;
-        double min_low;     // the lowest low seen so far in the dataframe data vector containing this bar
-        double max_high;    // the highest high seen so far in the dataframe data vector containing this bar
         double rolling_high;
         double rolling_low;
         double sma;

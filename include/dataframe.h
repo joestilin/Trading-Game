@@ -21,7 +21,9 @@ class DataFrame {
         
     private:
         void CalculateSMA(int window);
-        void CalculateVolatility(int window);
+        void CalculateRollingVolatility(int window);
+        void CalculateVolatility();
+        void CalculateRollingExtremes(int window);
         DataParser parser;
 
 

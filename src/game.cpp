@@ -7,7 +7,7 @@
 Game::Game() { }
 
 void Game::Run() {
-    std::size_t kFramesPerSecond{30};
+    std::size_t kFramesPerSecond{60};
     std::size_t kMsPerFrame = 1000 / kFramesPerSecond;
     std::size_t kScreenWidth = 1280;
     std::size_t kScreenHeight = 640;

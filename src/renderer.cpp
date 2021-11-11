@@ -95,7 +95,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
      ClearScreen();
 
-     UpdateYScale(dataframe);
+     UpdateYScale(dataframe, current_bar);
 
      DisplayBalance(tradelog);
 
@@ -142,8 +142,10 @@ void Renderer::ClearScreen() {
     SDL_RenderClear(sdl_renderer);
 }
 
-void Renderer::UpdateYScale(DataFrame const &dataframe) {
-    y_scale = screen_height / dataframe.volatility;
+void Renderer::UpdateYScale(DataFrame const &dataframe, std::size_t const &current_bar) {
+    // y_scale = 0.1*screen_height / dataframe.data[current_bar].volatility;
+    // y_scale = 5 * screen_height / dataframe.volatility;
+    y_scale = screen_height / (dataframe.data[current_bar].rolling_high - dataframe.data[current_bar].rolling_low);
 }
 
 void Renderer::SetCandleStickColor(DataBar const &bar, size_t const &current_bar, int bar_number) {
