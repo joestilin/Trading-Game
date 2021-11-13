@@ -8,6 +8,7 @@ class Game {
     Game();
     void Run();
     Symbol currentSymbol;
+    bool running;
 
 };
 

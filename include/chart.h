@@ -12,10 +12,10 @@
 class Chart {
     public:
         Chart();
-        void Run(Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration);
-        void Update();
+        void Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration);
+        void Update(bool &running);
         double getBalance();
-        void setState(bool &state);
+        bool complete;
 
     private:
         void OpenTrade();
@@ -28,7 +28,6 @@ class Chart {
 
         //std::size_t scroll_position = 10;
         std::size_t current_bar{10};
-        bool running = true;
         Action action;
         bool scrolling = false;
         bool buying = false;

@@ -5,12 +5,12 @@
 #include <iostream>
 
 
-Chart::Chart() {
+Chart::Chart() { 
     // create financial dataframe from file
     dataframe.LoadData();
 }
 
-void Chart::Run(Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration) {
+void Chart::Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration) {
 
     // timing
     Uint32 title_timestamp = SDL_GetTicks();
@@ -26,7 +26,7 @@ void Chart::Run(Controller &controller, Renderer &renderer, Symbol &currentSymbo
         scrolling = false;
         action = Action::HOLD;
         controller.HandleInput(running, action);
-        Update();
+        Update(running);
         renderer.RenderChart(dataframe, tradelog, current_bar, currentSymbol);
         
         frame_end = SDL_GetTicks();
@@ -47,16 +47,16 @@ void Chart::Run(Controller &controller, Renderer &renderer, Symbol &currentSymbo
     }
 }
 
-void Chart::Update() {
+void Chart::Update(bool &running) {
 
     current_bar++;
 
     // end the chart when scrolling reaches the last bar in the dataset
     if (current_bar == dataframe.n_bars) {
-        running = false;
+        complete = true;
     }
 
-    // or when the player's balance reaches zero. 
+    // end the entire game if the player's balance reaches 0
     if (tradelog.balance <= 0) {
         running = false;
     }
@@ -87,10 +87,6 @@ void Chart::Update() {
 
 double Chart::getBalance() {
     
-}
-
-void Chart::setState(bool &state) {
-    running = state;
 }
 
 void Chart::OpenTrade() {

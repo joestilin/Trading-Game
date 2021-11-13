@@ -14,12 +14,15 @@ void Game::Run() {
 
     Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
-    
-    Lobby lobby;
-    lobby.Run(controller, renderer, currentSymbol, kMsPerFrame);
-    bool state = lobby.getState();
 
-    Chart chart;
-    chart.setState(state);
-    chart.Run(controller, renderer, currentSymbol, kMsPerFrame);
+    running = true;
+    
+    while (running) {
+        Lobby lobby;
+        lobby.Run(running, controller, renderer, currentSymbol, kMsPerFrame);
+
+        Chart chart;
+        chart.Run(running, controller, renderer, currentSymbol, kMsPerFrame);
+    }
+    
 }

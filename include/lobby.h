@@ -15,12 +15,10 @@ class Lobby {
 
     Lobby();
     void ParseSymbols();
-    void Run(Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t &target_frame_duration);
+    void Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t &target_frame_duration);
     void Update(Symbol &currentSymbol);
-    bool getState();
 
     private:
-    bool running = true;
     bool selection = false;
     bool validSelection = false;
     std::string inputText = "";

@@ -6,7 +6,7 @@ Lobby::Lobby() {
     ParseSymbols();
 }
 
-void Lobby::Run(Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t &target_frame_duration) {
+void Lobby::Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t &target_frame_duration) {
 
      // timing variables
     Uint32 title_timestamp = SDL_GetTicks();
@@ -66,10 +66,6 @@ void Lobby::Update(Symbol &currentSymbol) {
             inputText = "";
         }
     }
-}
-
-bool Lobby::getState() {
-    return running;
 }
 
 void Lobby::ParseSymbols() {
