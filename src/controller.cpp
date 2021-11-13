@@ -23,7 +23,7 @@ void Controller::HandleInput(bool &running, Action &action) {
     }
 }
 
-void Controller::HandleLobbyInput(bool &running, bool &selection, std::string &inputText) {
+void Controller::HandleLobbyInput(bool &running, bool &selection, bool &random_selection, std::string &inputText) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
@@ -49,17 +49,20 @@ void Controller::HandleLobbyInput(bool &running, bool &selection, std::string &i
                 else if (e.key.keysym.sym == SDLK_RETURN) {
                     selection = true;
                 }
+                // handle right arrow
+                else if (e.key.keysym.sym == SDLK_RIGHT) {
+                    random_selection = true;
+                }
             break;
             //Special text input event
             case SDL_TEXTINPUT:
-                //Not copy or pasting
-                if( !( SDL_GetModState() & KMOD_CTRL && ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' || e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) ) )
+                //Not copy or pasting. Also, ignore spaces
+                if( !( SDL_GetModState() & KMOD_CTRL && ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' || e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) || e.text.text[0] == ' ') )
                     {
                         //Append character
                         inputText += e.text.text;
                         //renderText = true;
                     }
-                
             break; 
         }
     }

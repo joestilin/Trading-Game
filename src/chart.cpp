@@ -10,7 +10,8 @@ Chart::Chart() {
     dataframe.LoadData();
 }
 
-void Chart::Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration) {
+void Chart::Run(bool &running, Controller &controller, Renderer &renderer, 
+                TradeLog &tradelog, Symbol &currentSymbol, std::size_t target_frame_duration) {
 
     // timing
     Uint32 title_timestamp = SDL_GetTicks();
@@ -28,7 +29,7 @@ void Chart::Run(bool &running, Controller &controller, Renderer &renderer, Symbo
         scrolling = false;
         action = Action::HOLD;
         controller.HandleInput(running, action);
-        Update(running);
+        Update(running, tradelog);
         renderer.RenderChart(dataframe, tradelog, current_bar, currentSymbol);
         
         frame_end = SDL_GetTicks();
@@ -49,7 +50,7 @@ void Chart::Run(bool &running, Controller &controller, Renderer &renderer, Symbo
     }
 }
 
-void Chart::Update(bool &running) {
+void Chart::Update(bool &running, TradeLog &tradelog) {
 
     current_bar++;
 
@@ -66,22 +67,24 @@ void Chart::Update(bool &running) {
     switch (action) {
         case HOLD:
             if (tradelog.trades.size() > 0 && tradelog.trades.back().status == OPEN) {
-                UpdateOpenTradeProfit();
+                UpdateOpenTradeProfit(tradelog);
             }
-            else { }
+            else { 
+                // no trades open, do nothing
+                 }
             break;
     }
 
     if (action != HOLD){
         switch(tradelog.current_position) { 
             case FLAT:
-                OpenTrade();
+                OpenTrade(tradelog);
                 break;
             case SHORT:
-                CloseShortTrade();
+                CloseShortTrade(tradelog);
                 break;
             case LONG:
-                CloseLongTrade();
+                CloseLongTrade(tradelog);
                 break;
         }
     }   
@@ -91,7 +94,7 @@ double Chart::getBalance() {
     
 }
 
-void Chart::OpenTrade() {
+void Chart::OpenTrade(TradeLog &tradelog) {
     Trade trade;
     trade.entry_price = dataframe.data[current_bar].close;
     switch (action) {
@@ -111,7 +114,7 @@ void Chart::OpenTrade() {
     tradelog.trades.push_back(trade);
 }
 
-void Chart::CloseShortTrade() {
+void Chart::CloseShortTrade(TradeLog &tradelog) {
     Trade& trade = tradelog.trades.back();
         switch (action) {
             case BUY:
@@ -127,7 +130,7 @@ void Chart::CloseShortTrade() {
         }
 }
 
-void Chart::CloseLongTrade() {
+void Chart::CloseLongTrade(TradeLog &tradelog) {
     Trade& trade = tradelog.trades.back();
     switch(action) {
         case BUY:
@@ -144,7 +147,15 @@ void Chart::CloseLongTrade() {
 }
 
 // TODO: switch for short and long cases
-void Chart::UpdateOpenTradeProfit() {
+void Chart::UpdateOpenTradeProfit(TradeLog &tradelog) {
     Trade& trade = tradelog.trades.back();
-    trade.profit = dataframe.data[current_bar].close - trade.entry_price;
+    switch (tradelog.current_position) {
+        case LONG:
+            trade.profit = dataframe.data[current_bar].close - trade.entry_price;
+            break;
+        case SHORT:
+            trade.profit = trade.entry_price - dataframe.data[current_bar].close;
+
+    }
+    
 }

@@ -7,7 +7,8 @@ DataFrame::DataFrame() { }
 void DataFrame::LoadData() {
     parser.ParseData(data);
     n_bars = data.size();
-    CalculateSMA(100);
+    CalculateLargeSMA(100);
+    CalculateSmallSMA(1);
     CalculateRollingVolatility(100);
     CalculateVolatility();
     CalculateRollingExtremes(200);
@@ -20,17 +21,32 @@ void DataFrame::PrintData() {
     }
 }
 
-void DataFrame::CalculateSMA(int window) {
+void DataFrame::CalculateLargeSMA(int window) {
     double sum = 0;
     for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
         sum += data[i].close;
         if (i > window) {
             sum -= data[i - window].close;
-            data[i].sma = sum / window;
+            data[i].large_sma = sum / window;
         }
         else 
         {
-            data[i].sma = sum / (i + 1);
+            data[i].large_sma = sum / (i + 1);
+        }
+    }
+}
+
+void DataFrame::CalculateSmallSMA(int window) {
+    double sum = 0;
+    for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
+        sum += data[i].close;
+        if (i > window) {
+            sum -= data[i - window].close;
+            data[i].small_sma = sum / window;
+        }
+        else 
+        {
+            data[i].small_sma = sum / (i + 1);
         }
     }
 }

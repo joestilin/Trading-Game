@@ -8,23 +8,23 @@
 #include "controller.h"
 #include "trade.h"
 #include "symbol.h"
+#include "tradelog.h"
 
 class Chart {
     public:
         Chart();
-        void Run(bool &running, Controller &controller, Renderer &renderer, Symbol &currentSymbol, std::size_t target_frame_duration);
-        void Update(bool &running);
+        void Run(bool &running, Controller &controller, Renderer &renderer, TradeLog &tradelog, Symbol &currentSymbol, std::size_t target_frame_duration);
+        void Update(bool &running, TradeLog &tradelog);
         double getBalance();
         bool complete;
 
     private:
-        void OpenTrade();
-        void CloseLongTrade();
-        void CloseShortTrade();
-        void UpdateOpenTradeProfit();
+        void OpenTrade(TradeLog &tradelog);
+        void CloseLongTrade(TradeLog &tradelog);
+        void CloseShortTrade(TradeLog &tradelog);
+        void UpdateOpenTradeProfit(TradeLog &tradelog);
 
         DataFrame dataframe;
-        TradeLog tradelog;
 
         //std::size_t scroll_position = 10;
         std::size_t current_bar{10};

@@ -19,10 +19,10 @@ void Game::Run() {
     
     while (running) {
         Lobby lobby;
-        lobby.Run(running, controller, renderer, currentSymbol, kMsPerFrame);
+        lobby.Run(running, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
 
         Chart chart;
-        chart.Run(running, controller, renderer, currentSymbol, kMsPerFrame);
+        chart.Run(running, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
     }
     
 }

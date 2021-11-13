@@ -9,7 +9,10 @@ Players interact with historical price data pulled from Yahoo Finance. Players c
 Currently supported financial symbols include:
 
 8,094 stock symbols listed on NASDAQ, NYSE, and AMEX
+
 2,506 ETF symbols
+
+11 Cryptocurrency symbols
 
 Financial symbols resource:
 https://www.nasdaq.com/market-activity/etf/screener

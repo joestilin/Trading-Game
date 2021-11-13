@@ -9,7 +9,7 @@ class TradeLog {
     public:
         TradeLog();
         std::vector<Trade> trades;
-        double balance{1000};
+        double balance{10000};
         Direction current_position{Direction::FLAT};
 };
 

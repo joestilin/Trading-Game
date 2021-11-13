@@ -15,12 +15,13 @@ class Renderer {
         void RenderChart(DataFrame const &dataframe, TradeLog const &tradelog, 
                     size_t const &current_bar, Symbol const &currentSymbol);
 
-        void RenderLobby(std::string const &inputText);
+        void RenderLobby(std::string const &inputText, TradeLog const &tradelog);
 
         void UpdateWindow_Title(int const &fps);
 
     private:
 
+        // render std::string text with SDL_Color text_color center of text at int x, int y
         void RenderText(std::string text, SDL_Color text_color, int x, int y);
         void InitializeDisplay();
         void UpdateXOffset(size_t const &current_bar);

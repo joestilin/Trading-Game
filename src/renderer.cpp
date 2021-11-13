@@ -54,16 +54,26 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     TTF_Quit();
 }
 
- void Renderer::RenderLobby(std::string const &inputText){
+ void Renderer::RenderLobby(std::string const &inputText, TradeLog const &tradelog){
     ClearScreen();
     
     SDL_Color text_color = {200, 200, 200};
-    std::string queryText = "Enter a ticker";
-    // render the query text
-    RenderText(queryText, text_color, 520, 320);
+    
+    std::stringstream balance_text;
+    balance_text << "Your balance is $" << std::setprecision(2) << std::fixed << tradelog.balance;
+    std::string goalText = "Try to get to $1MM";
+    std::string queryText = "Type in a symbol and hit enter:";
+    std::string exampleText = "Ideas: AAPL, TSLA, BTC-USD, or press right arrow for a random chart!";
 
+    // render the balance text
+    RenderText(balance_text.str(), text_color, screen_width / 2, screen_height / 5);
+    // render the query text
+    RenderText(queryText, text_color, screen_width / 2, 2 * screen_height / 5);
     // render user input text
-    RenderText(inputText, text_color, 520, 400);
+    RenderText(inputText, text_color, screen_width / 2, 3 * screen_height / 5);
+    // render the example text
+    RenderText(exampleText, text_color, screen_width / 2, 4 * screen_height / 5 );
+    
 
     // update screen
     SDL_RenderPresent(sdl_renderer);
@@ -77,8 +87,8 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         SDL_Rect box;
         SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
         text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
-        box.x = x;
-        box.y = y;
+        box.x = x - text_surface->w / 2;
+        box.y = y - text_surface->h / 2;
         box.h = text_surface->h;
         box.w = text_surface->w;
         SDL_RenderCopy(sdl_renderer, text_texture, NULL, &box);
@@ -175,7 +185,7 @@ void Renderer::DrawCandle(DataBar const &bar, int const &bar_number,
 
     // candle body position and dimensions
     x = bar_width * bar_number + bar_gap + x_offset;
-    y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
+    y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - std::max(bar.open, bar.close));
          
 
     if (x >= left_margin && y >= top_margin) {
@@ -189,7 +199,7 @@ void Renderer::DrawCandle(DataBar const &bar, int const &bar_number,
 
     // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - wick_width + x_offset;
-        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.high, bar.low));
+        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - std::max(bar.high, bar.low));
 
         if (x >= left_margin && y >= top_margin) {
             block.x = x;
@@ -206,16 +216,31 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
     // Draw open trade line
     // endpoints of the line
     double x1 = tradelog.trades.back().index * bar_width + bar_gap + x_offset;
-    double y1 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - tradelog.trades.back().entry_price);
+    double y1 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - tradelog.trades.back().entry_price);
     double x2 = current_bar * bar_width + bar_gap + x_offset;
-    double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - dataframe.data[current_bar].close);
+    double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - dataframe.data[current_bar].close);
     
-    if (y1 >= y2) {
-        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    switch (tradelog.current_position) {
+        case LONG:
+            if (y1 >= y2) {
+                SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+            }
+            else {
+                SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+            }
+            break;
+        case SHORT:
+            if (y1 <= y2) {
+                SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+            }
+            else {
+                SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+            }
+            break;
+
+        
     }
-    else {
-        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-    }
+    
 
     DrawLine(x1, y1, x2, y2, 10);
 }
@@ -223,16 +248,16 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
 void Renderer::DisplayBalance(TradeLog const &tradelog) {
     std::string body_text = "Balance:";
     std::stringstream balance_text;
-    balance_text << std::setprecision(2) << std::fixed << tradelog.balance;
+    balance_text << "$" << std::setprecision(2) << std::fixed << tradelog.balance;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(body_text, text_color, 30, 30);
+    RenderText(body_text, text_color, screen_width / 10, screen_height / 20);
     if (tradelog.balance >= 0 ) {
         text_color = {0x00, 0xFF, 0x00};
     }
     else {
         text_color = {0xFF, 0x00, 0x00};
     }
-    RenderText(balance_text.str(), text_color, 150, 30);
+    RenderText(balance_text.str(), text_color, 2 * screen_width / 10, screen_height / 20);
 }
 
 void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
@@ -240,22 +265,22 @@ void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
     std::stringstream balance_text;
     balance_text << "$" << std::setprecision(2) << std::fixed << tradelog.trades.back().profit;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(body_text, text_color, 300, 30);
+    RenderText(body_text, text_color, 3 * screen_width / 10, screen_height / 20);
     if (tradelog.trades.back().profit >= 0 ) {
         text_color = {0x00, 0xFF, 0x00};
     }
     else {
         text_color = {0xFF, 0x00, 0x00};
     }
-    RenderText(balance_text.str(), text_color, 450, 30);
+    RenderText(balance_text.str(), text_color, 4 * screen_width / 10, screen_height / 20);
 }
 
 void Renderer::DisplaySymbol(Symbol const &currentSymbol) {
     std::string symbol_text = currentSymbol.symbol;
     std::string name_text = currentSymbol.name;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(symbol_text, text_color, 600, 30);
-    RenderText(name_text, text_color, 700, 30);
+    RenderText(symbol_text, text_color, 5 * screen_width / 10, screen_height / 20);
+    RenderText(name_text, text_color, 8 * screen_width / 10, screen_height / 20);
 }
 
 void Renderer::DrawLine(double x1, double y1, double x2, double y2, int thickness) {
