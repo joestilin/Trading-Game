@@ -19,8 +19,10 @@ void Chart::Run(bool &running, Controller &controller, Renderer &renderer, Symbo
     Uint32 frame_duration;
     int frame_count = 0;
 
+    complete = false;
+
     // chart loop
-    while (running) {
+    while (running && !complete) {
         frame_start = SDL_GetTicks();
 
         scrolling = false;

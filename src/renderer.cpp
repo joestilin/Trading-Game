@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <iomanip>
 
 Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_height) 
     : screen_width(screen_width), screen_height(screen_height) {
@@ -216,27 +217,51 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
         SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
     }
 
-    SDL_RenderDrawLine(sdl_renderer, x1, y1, x2, y2);
+    DrawLine(x1, y1, x2, y2, 10);
 }
 
 void Renderer::DisplayBalance(TradeLog const &tradelog) {
-    std::string balance_text = "$" + std::to_string(tradelog.balance);
+    std::string body_text = "Balance:";
+    std::stringstream balance_text;
+    balance_text << std::setprecision(2) << std::fixed << tradelog.balance;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(balance_text, text_color, 30, 30);
+    RenderText(body_text, text_color, 30, 30);
+    if (tradelog.balance >= 0 ) {
+        text_color = {0x00, 0xFF, 0x00};
+    }
+    else {
+        text_color = {0xFF, 0x00, 0x00};
+    }
+    RenderText(balance_text.str(), text_color, 150, 30);
 }
 
 void Renderer::DisplayOpenTradeBalance(TradeLog const &tradelog) {
-    std::string balance_text = "$" + std::to_string(tradelog.trades.back().profit);
+    std::string body_text = "Trade Profit:";
+    std::stringstream balance_text;
+    balance_text << "$" << std::setprecision(2) << std::fixed << tradelog.trades.back().profit;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(balance_text, text_color, 500, 30);
+    RenderText(body_text, text_color, 300, 30);
+    if (tradelog.trades.back().profit >= 0 ) {
+        text_color = {0x00, 0xFF, 0x00};
+    }
+    else {
+        text_color = {0xFF, 0x00, 0x00};
+    }
+    RenderText(balance_text.str(), text_color, 450, 30);
 }
 
 void Renderer::DisplaySymbol(Symbol const &currentSymbol) {
     std::string symbol_text = currentSymbol.symbol;
     std::string name_text = currentSymbol.name;
     SDL_Color text_color = {200, 200, 200};
-    RenderText(symbol_text, text_color, 750, 30);
-    RenderText(name_text, text_color, 750, 100);
+    RenderText(symbol_text, text_color, 600, 30);
+    RenderText(name_text, text_color, 700, 30);
+}
+
+void Renderer::DrawLine(double x1, double y1, double x2, double y2, int thickness) {
+    for (int i = 0; i < thickness; i++) {
+        SDL_RenderDrawLine(sdl_renderer, x1, y1 + i, x2, y2 + i);
+    }
 }
 
     

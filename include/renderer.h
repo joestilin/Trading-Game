@@ -33,6 +33,7 @@ class Renderer {
                         size_t const &current_bar, DataFrame const &dataframe);
         void DrawCandleWick(DataFrame const &dataframe);
         void DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar);
+        void DrawLine(double x1, double x2, double y1, double y2, int thickness);
         void DisplayBalance(TradeLog const &tradelog);
         void DisplayOpenTradeBalance(TradeLog const &tradelog);
         void DisplaySymbol(Symbol const &currentSymbol);
@@ -60,6 +61,9 @@ class Renderer {
         int bar_gap{5};
         double x_scale;             // pixels per data unit
         double y_scale;
+
+        // Colors
+        
 
 };
 #endif

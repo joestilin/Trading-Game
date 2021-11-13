@@ -16,5 +16,5 @@ def get_financial_data(ticker, days_back, time_interval):
 
 symbol = sys.argv[1]
 interval = sys.argv[2]
-data = get_financial_data(symbol, 730, interval)
+data = get_financial_data(symbol, 180, interval)
 pd.DataFrame(data).to_csv("data.csv")
