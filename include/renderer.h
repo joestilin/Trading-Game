@@ -36,8 +36,10 @@ class Renderer {
         void DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tradelog, size_t const &current_bar);
         void DrawLine(double x1, double x2, double y1, double y2, int thickness);
         void DisplayBalance(TradeLog const &tradelog);
+        void DisplayProgressBar(TradeLog const &tradelog);
         void DisplayOpenTradeBalance(TradeLog const &tradelog);
         void DisplaySymbol(Symbol const &currentSymbol);
+        void DisplayInstructions();
 
     
         SDL_Window *sdl_window;

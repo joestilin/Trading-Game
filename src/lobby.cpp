@@ -99,7 +99,7 @@ void Lobby::ParseSymbolFile(std::string filename) {
     std::vector<std::string> row;
 
     if (stream.is_open()) {
-        std::cout << "File opened!" << "\n";
+        // std::cout << "File opened!" << "\n";
 
         while (std::getline(stream, line)) {
             row.clear();

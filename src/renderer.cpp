@@ -63,7 +63,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     balance_text << "Your balance is $" << std::setprecision(2) << std::fixed << tradelog.balance;
     std::string goalText = "Try to get to $1MM";
     std::string queryText = "Type in a symbol and hit enter:";
-    std::string exampleText = "Ideas: AAPL, TSLA, BTC-USD, or press right arrow for a random chart!";
+    std::string exampleText = "Ideas:   AAPL   TSLA   QQQ   BTC-USD   EURUSD=X    Right arrow for a random chart";
 
     // render the balance text
     RenderText(balance_text.str(), text_color, screen_width / 2, screen_height / 5);
@@ -110,7 +110,11 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
 
      DisplayBalance(tradelog);
 
+     DisplayProgressBar(tradelog);
+
      DisplaySymbol(currentSymbol);
+
+     DisplayInstructions();
      
      int bar_number = 0;
 
@@ -124,6 +128,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         bar_number++;
      }
 
+    // If there's currently a trade open, display the trade line and profit
     if (tradelog.trades.size() > 0 && tradelog.trades.back().status == Status::OPEN) {
         DrawOpenTradeLine(dataframe, tradelog, current_bar);
         DisplayOpenTradeBalance(tradelog);
@@ -154,8 +159,6 @@ void Renderer::ClearScreen() {
 }
 
 void Renderer::UpdateYScale(DataFrame const &dataframe, std::size_t const &current_bar) {
-    // y_scale = 0.1*screen_height / dataframe.data[current_bar].volatility;
-    // y_scale = 5 * screen_height / dataframe.volatility;
     y_scale = screen_height / (dataframe.data[current_bar].rolling_high - dataframe.data[current_bar].rolling_low);
 }
 
@@ -237,11 +240,8 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
                 SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
             }
             break;
-
         
     }
-    
-
     DrawLine(x1, y1, x2, y2, 10);
 }
 
@@ -281,6 +281,35 @@ void Renderer::DisplaySymbol(Symbol const &currentSymbol) {
     SDL_Color text_color = {200, 200, 200};
     RenderText(symbol_text, text_color, 5 * screen_width / 10, screen_height / 20);
     RenderText(name_text, text_color, 8 * screen_width / 10, screen_height / 20);
+}
+
+void Renderer::DisplayProgressBar(TradeLog const &tradelog) {
+    SDL_Rect progress_bar;
+    progress_bar.x = screen_width / 10;
+    progress_bar.y = screen_height / 10;
+    progress_bar.w = 0.8 * screen_width * tradelog.balance / tradelog.winning_goal;
+    progress_bar.h = 25;
+    SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+    SDL_RenderFillRect(sdl_renderer, &progress_bar);
+
+    // draw outline around the bar
+    progress_bar.w = 0.8 * screen_width;
+    SDL_SetRenderDrawColor(sdl_renderer, 0xAA, 0xAA, 0xAA, 0xFF);
+    SDL_RenderDrawRect(sdl_renderer, &progress_bar);
+
+    // Display the numerical limits of the bar
+    std::string bar_min_text = "$0.00";
+    std::string bar_max_text = "$1MM";
+    SDL_Color text_color = {200, 200, 200};
+    RenderText(bar_min_text, text_color, screen_width / 10, 1.6 * screen_height / 10);
+    RenderText(bar_max_text, text_color, 9 * screen_width / 10, 1.6 * screen_height / 10);
+
+}
+
+void Renderer::DisplayInstructions() {
+    std::string instructions_text = "Up key to buy, down key to sell";
+    SDL_Color text_color = {200, 200, 200};
+    RenderText(instructions_text, text_color, screen_width / 2, 1.6 * screen_height / 10);
 }
 
 void Renderer::DrawLine(double x1, double y1, double x2, double y2, int thickness) {

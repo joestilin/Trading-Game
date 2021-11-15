@@ -9,9 +9,9 @@ class TradeLog {
     public:
         TradeLog();
         std::vector<Trade> trades;
-        double balance{10000};
+        double balance{100000};
+        double position_percent{1.0};
+        double winning_goal{1000000};
         Direction current_position{Direction::FLAT};
 };
-
-
 #endif

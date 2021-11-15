@@ -11,7 +11,8 @@ Chart::Chart() {
 }
 
 void Chart::Run(bool &running, Controller &controller, Renderer &renderer, 
-                TradeLog &tradelog, Symbol &currentSymbol, std::size_t target_frame_duration) {
+                TradeLog &tradelog, Symbol &currentSymbol,
+                std::size_t target_frame_duration) {
 
     // timing
     Uint32 title_timestamp = SDL_GetTicks();
@@ -54,13 +55,27 @@ void Chart::Update(bool &running, TradeLog &tradelog) {
 
     current_bar++;
 
-    // end the chart when scrolling reaches the last bar in the dataset
+    // end the chart when scrolling reaches end
     if (current_bar == dataframe.n_bars) {
         complete = true;
+        // close the open trade if there is one and take the profit
+        if (tradelog.trades.size() > 0 && tradelog.trades.back().status == OPEN) {
+            Trade& trade = tradelog.trades.back();
+            trade.status = Status::CLOSED;
+            tradelog.balance += trade.profit;
+            tradelog.current_position = Direction::FLAT;
+        } 
     }
 
-    // end the entire game if the player's balance reaches 0
+    // display losing page if player's balance falls below zero
     if (tradelog.balance <= 0) {
+        std::cout << "You lose!" << std::endl;
+        running = false;
+    }
+
+    // display winning page if player achieves goal
+    if (tradelog.balance >= tradelog.winning_goal) {
+        std::cout << "You won!" << std::endl;
         running = false;
     }
 
@@ -90,10 +105,6 @@ void Chart::Update(bool &running, TradeLog &tradelog) {
     }   
 }
 
-double Chart::getBalance() {
-    
-}
-
 void Chart::OpenTrade(TradeLog &tradelog) {
     Trade trade;
     trade.entry_price = dataframe.data[current_bar].close;
@@ -103,12 +114,14 @@ void Chart::OpenTrade(TradeLog &tradelog) {
             trade.index = current_bar;
             trade.status = Status::OPEN;
             tradelog.current_position = Direction::LONG;
+            trade.amount = tradelog.position_percent * tradelog.balance / trade.entry_price;
             break;
         case SELL:
             trade.direction = Direction::SHORT;
             trade.index = current_bar;
             trade.status = Status::OPEN;
             tradelog.current_position = Direction::SHORT;
+            trade.amount = tradelog.position_percent * tradelog.balance / trade.entry_price;
             break;
     }
     tradelog.trades.push_back(trade);
@@ -119,7 +132,7 @@ void Chart::CloseShortTrade(TradeLog &tradelog) {
         switch (action) {
             case BUY:
                 trade.exit_price = dataframe.data[current_bar].close;
-                trade.profit = trade.shares * (trade.entry_price - trade.exit_price);
+                trade.profit = trade.amount * (trade.entry_price - trade.exit_price);
                 trade.status = Status::CLOSED;
                 tradelog.balance += trade.profit;
                 tradelog.current_position = Direction::FLAT;
@@ -138,7 +151,7 @@ void Chart::CloseLongTrade(TradeLog &tradelog) {
             break;
         case SELL:
             trade.exit_price = dataframe.data[current_bar].close;
-            trade.profit = trade.shares * (trade.exit_price - trade.entry_price);
+            trade.profit = trade.amount * (trade.exit_price - trade.entry_price);
             trade.status = Status::CLOSED;
             tradelog.balance += trade.profit;
             tradelog.current_position = Direction::FLAT;
@@ -146,16 +159,13 @@ void Chart::CloseLongTrade(TradeLog &tradelog) {
     }
 }
 
-// TODO: switch for short and long cases
 void Chart::UpdateOpenTradeProfit(TradeLog &tradelog) {
     Trade& trade = tradelog.trades.back();
     switch (tradelog.current_position) {
         case LONG:
-            trade.profit = dataframe.data[current_bar].close - trade.entry_price;
+            trade.profit = trade.amount * (dataframe.data[current_bar].close - trade.entry_price);
             break;
         case SHORT:
-            trade.profit = trade.entry_price - dataframe.data[current_bar].close;
-
+            trade.profit = trade.amount * (trade.entry_price - dataframe.data[current_bar].close);
     }
-    
 }

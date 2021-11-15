@@ -12,7 +12,6 @@ public:
     double entry_price;
     double exit_price;
     double amount;
-    double shares{100};
     double profit;
     Status status;
     int index;
