@@ -6,6 +6,7 @@
 #include "dataframe.h"
 #include "tradelog.h"
 #include "symbol.h"
+#include "state.h"
 
 class Renderer {
     public:
@@ -16,6 +17,8 @@ class Renderer {
                     size_t const &current_bar, Symbol const &currentSymbol);
 
         void RenderLobby(std::string const &inputText, TradeLog const &tradelog);
+
+        void RenderEndGame(TradeLog const &tradelog, State const &state);
 
         void UpdateWindow_Title(int const &fps);
 

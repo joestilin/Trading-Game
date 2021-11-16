@@ -1,8 +1,4 @@
 #include "game.h"
-#include "renderer.h"
-#include "controller.h"
-#include "lobby.h"
-#include "chart.h"
 
 Game::Game() { }
 
@@ -15,14 +11,22 @@ void Game::Run() {
     Renderer renderer(kScreenWidth, kScreenHeight);
     Controller controller;
 
-    running = true;
+    state = RUNNING;
     
-    while (running) {
+    // cycle through new lobby and chart gameplay until player, wins, loses, or quits
+    while (state == RUNNING) {
         Lobby lobby;
-        lobby.Run(running, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
+        lobby.Run(state, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
 
         Chart chart;
-        chart.Run(running, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
+        chart.Run(state, controller, renderer, tradelog, currentSymbol, kMsPerFrame);
     }
+
+    // if player hasn't quit, display winning page, or display losing page
+    if (state != QUIT) {
+        EndGame endgame;
+        endgame.Run(state, controller, renderer, tradelog, kMsPerFrame);
+    }
+    
     
 }

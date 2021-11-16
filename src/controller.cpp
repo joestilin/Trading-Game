@@ -2,12 +2,12 @@
 
 Controller::Controller() { }
 
-void Controller::HandleInput(bool &running, Action &action) {
+void Controller::HandleInput(State &state, Action &action) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
             case SDL_QUIT:
-                running = false;
+                state = QUIT;
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {
@@ -23,12 +23,12 @@ void Controller::HandleInput(bool &running, Action &action) {
     }
 }
 
-void Controller::HandleLobbyInput(bool &running, bool &selection, bool &random_selection, std::string &inputText) {
+void Controller::HandleLobbyInput(State &state, bool &selection, bool &random_selection, std::string &inputText) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
             case SDL_QUIT:
-                running = false;
+                state = QUIT;
                 break;
             case SDL_KEYDOWN:
                 // handle backspace
@@ -64,6 +64,17 @@ void Controller::HandleLobbyInput(bool &running, bool &selection, bool &random_s
                         //renderText = true;
                     }
             break; 
+        }
+    }
+}
+
+void Controller::HandleEndGameInput(State &state) {
+    SDL_Event e;
+    while(SDL_PollEvent(&e)) {
+        switch (e.type) {
+            case SDL_QUIT:
+                state = QUIT;
+                break;
         }
     }
 }

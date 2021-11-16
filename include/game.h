@@ -3,6 +3,12 @@
 
 #include "symbol.h"
 #include "tradelog.h"
+#include "endgame.h"
+#include "renderer.h"
+#include "controller.h"
+#include "lobby.h"
+#include "chart.h"
+#include "state.h"
 
 class Game {
     public:
@@ -10,6 +16,7 @@ class Game {
         void Run();
         Symbol currentSymbol;
         TradeLog tradelog;
+        State state;
         bool running;
 
 };

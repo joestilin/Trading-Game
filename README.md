@@ -4,7 +4,7 @@
 
 This game was developed for the capstone project for Udacity's C++ Nanodegree Program.
 
-Players interact with historical price data pulled from Yahoo Finance. Players can create long and short trade positions in a fast paced scrolling game, with the goal of maximizing their profits.
+Players interact with up to the minute price data pulled from Yahoo Finance. Players can create long and short trade positions in a fast paced scrolling game, with the goal of maximizing their profits.
 
 Currently supported financial symbols include:
 
@@ -14,10 +14,29 @@ Currently supported financial symbols include:
 
 11 Cryptocurrency symbols
 
-Financial symbols resource:
-https://www.nasdaq.com/market-activity/etf/screener
+13 major currency pairs
+
+## Gameplay
+
+Players begin with $100,000 with the goal of reaching $1MM. They can type in a financial symbol or press the right arrow key to choose a random symbol from the over 10,000 financial instruments supported. 
+
+Controls:
+
+Up arrow: BUY
+
+Down arrow: SELL
+
+If you buy first, you enter a long trade and your profit will be positive when price moves up. Down arrow to exit a long trade.
+
+Alternatively, if you sell first, you enter a short trade and your profit will be positive when price moves lower. Up arrow to exit a short trade.
+
+The game ends when the player wins by exceeding the goal ($1MM), or loses by falling below $0.
+
+At any time the game can be exited by closing the game window.
 
 ## Dependencies for running locally
+
+For linux users, dependencies can be installed in one command by running `./setup.bash` after cloning this repo.
 
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)

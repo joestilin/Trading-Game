@@ -7,8 +7,7 @@ DataFrame::DataFrame() { }
 void DataFrame::LoadData() {
     parser.ParseData(data);
     n_bars = data.size();
-    CalculateLargeSMA(100);
-    CalculateSmallSMA(1);
+    CalculateSMA(100);
     CalculateRollingVolatility(100);
     CalculateVolatility();
     CalculateRollingExtremes(200);
@@ -21,32 +20,21 @@ void DataFrame::PrintData() {
     }
 }
 
-void DataFrame::CalculateLargeSMA(int window) {
+void DataFrame::CalculateSMA(int window) {
+    
     double sum = 0;
     for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
+        // maintain sum of the close value of bars seen so far
         sum += data[i].close;
         if (i > window) {
+            // throw out the bar at front of window's close value from sum and average
             sum -= data[i - window].close;
-            data[i].large_sma = sum / window;
+            data[i].sma = sum / window;
         }
         else 
         {
-            data[i].large_sma = sum / (i + 1);
-        }
-    }
-}
-
-void DataFrame::CalculateSmallSMA(int window) {
-    double sum = 0;
-    for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
-        sum += data[i].close;
-        if (i > window) {
-            sum -= data[i - window].close;
-            data[i].small_sma = sum / window;
-        }
-        else 
-        {
-            data[i].small_sma = sum / (i + 1);
+            // if at less than window, keep the average of bars seen so far
+            data[i].sma = sum / (i + 1);
         }
     }
 }
@@ -55,7 +43,6 @@ void DataFrame::CalculateRollingVolatility(int window) {
     double sum = 0;
     double mean = 0;
     double sum_squares = 0;
-
     
     for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
         sum += data[i].close;

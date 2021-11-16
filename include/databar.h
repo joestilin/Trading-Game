@@ -17,8 +17,7 @@ class DataBar {
         double close;
         double rolling_high;
         double rolling_low;
-        double large_sma;
-        double small_sma;
+        double sma;
         double volatility;
     
     private:

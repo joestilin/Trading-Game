@@ -101,7 +101,6 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
  void Renderer::RenderChart(DataFrame const &dataframe, TradeLog const &tradelog, 
                             size_t const &current_bar, Symbol const &currentSymbol) {
 
-    
      UpdateXOffset(current_bar);
 
      ClearScreen();
@@ -138,6 +137,34 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
      SDL_RenderPresent(sdl_renderer);
 
  }
+
+void Renderer::RenderEndGame(TradeLog const &tradelog, State const &state) {
+    ClearScreen();
+    std::string message;
+    if (state == WIN) {
+        message = "You win!";
+    }
+    else if (state == LOSE) {
+        message = "Sorry, you lost.";
+    }
+
+    std::stringstream balance_text;
+    balance_text << "Final Balance: $" << std::setprecision(2) << std::fixed << tradelog.balance;
+    SDL_Color text_color = {200, 200, 200};
+    RenderText(message, text_color, screen_width / 2, screen_height / 2);
+    if (tradelog.balance >= 0 ) {
+        text_color = {0x00, 0xFF, 0x00};
+    }
+    else {
+        text_color = {0xFF, 0x00, 0x00};
+    }
+    RenderText(balance_text.str(), text_color, screen_width / 2, 6 * screen_height / 10);
+
+
+
+    // update screen
+    SDL_RenderPresent(sdl_renderer);
+}
 
 void Renderer::UpdateWindow_Title(int const &fps) {
     std::string title{"FPS " + std::to_string(fps)};
@@ -188,7 +215,7 @@ void Renderer::DrawCandle(DataBar const &bar, int const &bar_number,
 
     // candle body position and dimensions
     x = bar_width * bar_number + bar_gap + x_offset;
-    y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - std::max(bar.open, bar.close));
+    y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
          
 
     if (x >= left_margin && y >= top_margin) {
@@ -202,7 +229,7 @@ void Renderer::DrawCandle(DataBar const &bar, int const &bar_number,
 
     // wick body position and dimensions
         x = bar_width * bar_number + bar_gap + bar_width / 2 - wick_width + x_offset;
-        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - std::max(bar.high, bar.low));
+        y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.high, bar.low));
 
         if (x >= left_margin && y >= top_margin) {
             block.x = x;
@@ -219,9 +246,9 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
     // Draw open trade line
     // endpoints of the line
     double x1 = tradelog.trades.back().index * bar_width + bar_gap + x_offset;
-    double y1 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - tradelog.trades.back().entry_price);
+    double y1 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - tradelog.trades.back().entry_price);
     double x2 = current_bar * bar_width + bar_gap + x_offset;
-    double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].large_sma - dataframe.data[current_bar].close);
+    double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - dataframe.data[current_bar].close);
     
     switch (tradelog.current_position) {
         case LONG:

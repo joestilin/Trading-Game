@@ -5,6 +5,7 @@
 #include "renderer.h"
 #include "symbol.h"
 #include "tradelog.h"
+#include "state.h"
 #include <iterator>
 #include <time.h>
 #include <fstream>
@@ -18,7 +19,7 @@ class Lobby {
     Lobby();
     void ParseSymbols();
     void ParseSymbolFile(std::string filename);
-    void Run(bool &running, Controller &controller, Renderer &renderer, TradeLog &tradelog, Symbol &currentSymbol, std::size_t &target_frame_duration);
+    void Run(State &state, Controller &controller, Renderer &renderer, TradeLog &tradelog, Symbol &currentSymbol, std::size_t &target_frame_duration);
     void Update(Symbol &currentSymbol);
 
     private:
