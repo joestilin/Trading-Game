@@ -66,6 +66,26 @@ For linux users, dependencies can be installed in one command by running `./setu
 4. Run:
 `./TradingGame`
 
+## Rubric Points Addressed
+List of rubric points addressed for the Udacity C++ Nanodegree capstone project:
+
+1. "The project demonstrates an understanding of C++ functions and control structures."
+  * "A variety of control structures are used in the project"
+    * `while` loops in `Run()` member functions in `game.cpp` (17-23) `lobby.cpp` (27-54), `chart.cpp` (22-46) and `endgame.cpp` (20-46).
+    * `for` loops in `CalculateSMA()` (26-39), `CalculateRollingVolatility` (47-70), and `CalculateRollingExtremes` (95-119) member functions in `dataframe.cpp`; and with use of `auto` keyword in a `for` loop in `RenderChart` function in `renderer.cpp` (121-128)
+    * `switch` and `case` control blocks in functions `HandleControlInput` (8-22), `HandleLobbyInput` (29-67), and `HandleEndGameInput` (74-78) in `controller.cpp`. Also in `Update` function (78-87, 91-101), `OpenTrade` function (108-125), `CloseShortTrade` function (132-144), `CloseLongTrade` function (149-161), and `UpdateOpenTradeProfit` function (106-174) in `chart.cpp`.
+  * "The project code is clearly organized into functions."
+    * See header files for function prototypes and `.cpp` files for implementation. Functions perform small tasks and repeat code is avoided throughout the project using functions.
+
+2. "The project reads data from a file and process the data, or the program writes data to a file."
+  * "The project reads data from an external file or writes data to a file as part of the necessary operation of the program."
+    * See `dataparser.cpp` wherein `ParseData` function reads data line by line from a .csv file of financial data, processes it in a `DataBar` object.
+    * Also see `lobby.cpp` in which the `ParseSymbolFile` function (101-133) reads data from a .csv file of financial symbols and their names, and stores them a `<std::string, Symbol>`
+    * The project also creates .csv files read by a `DataParser` by using `system` to run a Python script that pulls the latest financial data from Yahoo Finance.
+
+3. "The project accepts user input and processes the input."
+
+
 ## Develelopment Notes / Approach
 
 1. Vertical scale and offset of the chart during gameplay
