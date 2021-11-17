@@ -16,6 +16,8 @@ Currently supported financial symbols include:
 
 13 major currency pairs
 
+Supported financial symbols are listed in the `/data` directory.
+
 ## Gameplay
 
 Players begin with $100,000 with the goal of reaching $1MM. They can type in a financial symbol or press the right arrow key to choose a random symbol from the over 10,000 financial instruments supported. 
@@ -80,11 +82,31 @@ List of rubric points addressed for the Udacity C++ Nanodegree capstone project:
 2. "The project reads data from a file and process the data, or the program writes data to a file."
   * "The project reads data from an external file or writes data to a file as part of the necessary operation of the program."
     * See `dataparser.cpp` wherein `ParseData` function reads data line by line from a .csv file of financial data, processes it in a `DataBar` object.
-    * Also see `lobby.cpp` in which the `ParseSymbolFile` function (101-133) reads data from a .csv file of financial symbols and their names, and stores them a `<std::string, Symbol>`
-    * The project also creates .csv files read by a `DataParser` by using `system` to run a Python script that pulls the latest financial data from Yahoo Finance.
+    * Also see `lobby.cpp` in which the `ParseSymbolFile` function (101-133) reads data from a .csv file of financial symbols and their names, and stores them a `std::map<std::string, Symbol>`
+    * The project creates the .csv files read by a `DataParser` by using `system` to run a Python script that pulls the latest financial data from Yahoo Finance.
 
 3. "The project accepts user input and processes the input."
+  * Function `HandleLobbyInput` (26 -69) in class `Controller` (`controller.cpp`) monitors user input through SDL keyboard events. A buffer is maintained based on keyboard events, including backspace (pop a character from the buffer), enter, copy, and paste. The buffer is used as the input to the financial symbol the player wants to choose.
 
+4. "The project uses Object Oriented Programming techniques."
+  * "The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks."
+    * See all header and `.cpp` files. All data is held by objects and member functions perform operations on that data.
+
+5. "Classes use appropriate access specifiers for class members."
+  * All class data members are explicitly specified as public, protected, or private."
+    * See all header files, wherein all data members are declared as public or private with preceding keywords.
+
+6. "Classes abstract implementation details from their interfaces."
+  * "All class member functions document their effects, either through function names, comments, or formal documentation. Member functions do not change program state in undocumented ways."
+  * See all header files and function interfaces. Functions are named descriptively and comments above function declarations describe function behavior.
+
+7. "Classes encapsulate behavior."
+  * "Appropriate data and functions are grouped into classes. Member data that is subject to an invariant is hidden from the user. State is accessed via member functions."
+    * Classes group different types of data logically. For example, `TradeLog` keeps track of the player's trade history through a `balance` and a `std::vector` of `Trades`. The game moves through `Lobby`, `Chart`, and `EndGame` phases, each class encapsulating the behavior of those portions of the game. Data is hidden from the user, through the `private` keyword, for example in the `Render` class, where most of the implementation is embodied in `private` functions and data members.
+
+8. "The project makes use of references in function declarations."
+  * "At least two variables are defined as references, or two functions use pass-by-reference in the project code."
+    * Every function in all classes of this project use pass-by-reference.
 
 ## Develelopment Notes / Approach
 
