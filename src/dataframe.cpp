@@ -45,17 +45,21 @@ void DataFrame::CalculateRollingVolatility(int window) {
     double sum_squares = 0;
     
     for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
+        // maintain sum of close values seen so far
         sum += data[i].close;
         if (i > window) {
+            // drop the first value in the window as it slides along
             sum -= data[i - window].close;
             mean = sum / window;
             for (std::vector<DataBar>::size_type j = i - window; j != i; j++) {
+                // sum of squares of the deviation from the mean
                 sum_squares += std::pow(data[j].close - mean, 2);
             }
             data[i].volatility = std::pow(sum_squares / window, 0.5);
             sum_squares = 0;
         }
         else {
+            // if we're at less than window size, operate on all values seen so far
             mean = sum / (i + 1);
             for (std::vector<DataBar>::size_type j = 0; j != i; j++) {
                 sum_squares += std::pow(data[j].close - mean, 2);
@@ -85,10 +89,11 @@ void DataFrame::CalculateVolatility() {
 }
 
 void DataFrame::CalculateRollingExtremes(int window) {
+    // maintain highest high and lowest low
     double high = 0;
-    double low = 1000000000;
+    double low = INFINITY;
     for (std::vector<DataBar>::size_type i = 0; i != data.size(); i++) {
-        if (i < window) {
+        if (i < window) { 
             if (data[i].close > high) {
                 high = data[i].close;
             }
@@ -97,8 +102,9 @@ void DataFrame::CalculateRollingExtremes(int window) {
             }
         }
         else {
+            // reset extremes for every bar's window
             high = 0;
-            low = 1000000000;
+            low = INFINITY;
             for (std::vector<DataBar>::size_type j = i - window; j != i; j++) {
                 if (data[j].close > high) {
                     high = data[j].close;

@@ -7,8 +7,8 @@ enum Status {OPEN, CLOSED};
 
 class Trade {
 public:
+    // Contains data for a financial trade
     Trade();
-
     double entry_price;
     double exit_price;
     double amount;

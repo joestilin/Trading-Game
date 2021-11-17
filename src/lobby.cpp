@@ -2,7 +2,7 @@
 #include <iostream>
 
 Lobby::Lobby() { 
-    // load the file of financial symbols into the map, symbols
+    // load the file of financial symbols into the symbols map
     ParseSymbols();
     // initialize random number generator with seed from time
     time_t t;
@@ -22,6 +22,7 @@ void Lobby::Run(State &state, Controller &controller, Renderer &renderer,
     // enable text input
     SDL_StartTextInput();
 
+    // loop until player types in a valid financial symbol or chooses a random selection
     while (state == RUNNING && !validSelection) {
         frame_start = SDL_GetTicks();
 
@@ -48,16 +49,21 @@ void Lobby::Run(State &state, Controller &controller, Renderer &renderer,
             SDL_Delay(target_frame_duration - frame_duration);
         }
     }
+    // end text input
+    SDL_StopTextInput();
 }
 
 void Lobby::Update(Symbol &currentSymbol) {
+    // check if entered text is a supported symbol in symbols map
     if (selection) {
         if (symbols.find(inputText) != symbols.end()) {
+            // valid symbol. pull data from yfinance and set the current symbol
             RunPython(inputText);
             validSelection = true;
             currentSymbol = symbols[inputText];
         }
         else {
+            // invalid symbol
             std::cout << "Invalid symbol" << std::endl;
             selection = false;
             inputText = "";
@@ -74,6 +80,7 @@ void Lobby::Update(Symbol &currentSymbol) {
 }
 
 void Lobby::RunPython(std::string symbol){
+    // use system to run python script that calls yfinance
     std::string data_reader_file = "python/data.py";
     std::string arg1 = " " + symbol;
     std::string arg2 = " 1h";
@@ -84,12 +91,11 @@ void Lobby::RunPython(std::string symbol){
 }
 
 void Lobby::ParseSymbols() {
+    // parse each csv file of financial symbols
     ParseSymbolFile(kStockSymbolsFileName);
     ParseSymbolFile(kETFSymbolsFileName);
     ParseSymbolFile(kCryptoSymbolsFileName);
     ParseSymbolFile(kCurrencySymbolsFileName);
-
-    
 }
 
 void Lobby::ParseSymbolFile(std::string filename) {

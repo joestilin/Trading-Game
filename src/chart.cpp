@@ -22,9 +22,8 @@ void Chart::Run(State &state, Controller &controller, Renderer &renderer,
     while (state == RUNNING && !complete) {
         frame_start = SDL_GetTicks();
 
-        scrolling = false;
         action = Action::HOLD;
-        controller.HandleInput(state, action);
+        controller.HandleChartInput(state, action);
         Update(state, tradelog);
         renderer.RenderChart(dataframe, tradelog, current_bar, currentSymbol);
         

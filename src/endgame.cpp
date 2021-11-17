@@ -16,6 +16,7 @@ void EndGame::Run(State &state, Controller &controller, Renderer &renderer,
     // enable text input
     SDL_StartTextInput();
 
+    // display the end page for total_duration unless the player quits
     while (SDL_GetTicks() - start < total_duration && state != QUIT) {
         frame_start = SDL_GetTicks();
 
@@ -25,7 +26,7 @@ void EndGame::Run(State &state, Controller &controller, Renderer &renderer,
 
         renderer.RenderEndGame(tradelog, state);
         
-        // timing
+        // end of frame timing
         frame_end = SDL_GetTicks();
         frame_count++;
         frame_duration = frame_end - frame_start;
@@ -44,4 +45,6 @@ void EndGame::Run(State &state, Controller &controller, Renderer &renderer,
     }
 }
 
-void EndGame::Update() { }
+void EndGame::Update() {
+    // future features
+}

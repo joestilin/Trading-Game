@@ -7,6 +7,7 @@
 
 class TradeLog {
     public:
+        // contains history of trades data
         TradeLog();
         std::vector<Trade> trades;
         double balance{100000};

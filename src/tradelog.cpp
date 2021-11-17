@@ -1,5 +1,3 @@
 #include "tradelog.h"
 
-TradeLog::TradeLog() {
-
-}
+TradeLog::TradeLog() { }

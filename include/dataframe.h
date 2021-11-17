@@ -21,6 +21,10 @@ class DataFrame {
         double volatility;          // the volatility of this dataframe
         
     private:
+        /*Functions that caculate indicators on the data. Generally they don't need
+          need to be fast, as they only need to be called once.
+        */
+
         // calculate the simple moving average at each bar
         void CalculateSMA(int window);
 

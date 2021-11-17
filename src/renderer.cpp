@@ -74,7 +74,6 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
     // render the example text
     RenderText(exampleText, text_color, screen_width / 2, 4 * screen_height / 5 );
     
-
     // update screen
     SDL_RenderPresent(sdl_renderer);
 
@@ -87,6 +86,7 @@ Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_heig
         SDL_Rect box;
         SDL_Surface* text_surface = TTF_RenderText_Solid(font, text.c_str(), text_color);
         text_texture = SDL_CreateTextureFromSurface(sdl_renderer, text_surface);
+        // center the text in x and y - SDL references top left of SDL_Rects
         box.x = x - text_surface->w / 2;
         box.y = y - text_surface->h / 2;
         box.h = text_surface->h;
@@ -160,8 +160,6 @@ void Renderer::RenderEndGame(TradeLog const &tradelog, State const &state) {
     }
     RenderText(balance_text.str(), text_color, screen_width / 2, 6 * screen_height / 10);
 
-
-
     // update screen
     SDL_RenderPresent(sdl_renderer);
 }
@@ -173,15 +171,18 @@ void Renderer::UpdateWindow_Title(int const &fps) {
 }
 
 void Renderer::InitializeDisplay() {
+    // set bar width depending on screen width minus margins and the number of bars tha can be displayed
     bar_width = (screen_width - left_margin - right_margin) / max_bars_displayed;
 }
 
 void Renderer::UpdateXOffset(size_t const &current_bar) {
+    // x_offset moves to left as current_bar increases
     x_offset = screen_width - right_margin - current_bar * bar_width;
 }
 
 void Renderer::ClearScreen() {
-    SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+    // background color of the game!
+    SDL_SetRenderDrawColor(sdl_renderer, 0x2A, 0x2A, 0x2A, 0xFF);
     SDL_RenderClear(sdl_renderer);
 }
 
@@ -218,6 +219,7 @@ void Renderer::DrawCandle(DataBar const &bar, int const &bar_number,
     y = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - std::max(bar.open, bar.close));
          
 
+    // only draw if positive coordinates
     if (x >= left_margin && y >= top_margin) {
         block.x = x;
         block.y = y;
@@ -250,6 +252,7 @@ void Renderer::DrawOpenTradeLine(DataFrame const &dataframe, TradeLog const &tra
     double x2 = current_bar * bar_width + bar_gap + x_offset;
     double y2 = 0.5 * screen_height + y_scale * (dataframe.data[current_bar].sma - dataframe.data[current_bar].close);
     
+    // set color of trade line depending on type of trade (long or short) and slope of line
     switch (tradelog.current_position) {
         case LONG:
             if (y1 >= y2) {
@@ -340,6 +343,7 @@ void Renderer::DisplayInstructions() {
 }
 
 void Renderer::DrawLine(double x1, double y1, double x2, double y2, int thickness) {
+    // draw multiple lines vertically to create line thickness
     for (int i = 0; i < thickness; i++) {
         SDL_RenderDrawLine(sdl_renderer, x1, y1 + i, x2, y2 + i);
     }

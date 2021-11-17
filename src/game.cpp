@@ -27,6 +27,4 @@ void Game::Run() {
         EndGame endgame;
         endgame.Run(state, controller, renderer, tradelog, kMsPerFrame);
     }
-    
-    
 }

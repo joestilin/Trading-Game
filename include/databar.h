@@ -7,6 +7,7 @@
 class DataBar {
 
     public:
+        // Encapsulates data for a time unit (bar) of financial data
         DataBar();
 
         std::string date;

@@ -2,7 +2,7 @@
 
 Controller::Controller() { }
 
-void Controller::HandleInput(State &state, Action &action) {
+void Controller::HandleChartInput(State &state, Action &action) {
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         switch (e.type) {
