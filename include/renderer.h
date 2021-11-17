@@ -13,7 +13,7 @@ class Renderer {
         Renderer(const std::size_t screen_width, const std::size_t screen_height);
         ~Renderer();
 
-        // Render the chart with data from dataframe, tradelog, curren_bar, and currentSymbol
+        // Render the chart with data from dataframe, tradelog, current_bar, and currentSymbol
         void RenderChart(DataFrame const &dataframe, TradeLog const &tradelog, 
                     size_t const &current_bar, Symbol const &currentSymbol);
 
