@@ -2,6 +2,8 @@
 
 ## Gamified stock, ETF, Crypto, and Forex trading
 
+![Gameplay-Example](data/Gameplay-Example.png)
+
 This game was developed for the capstone project for Udacity's C++ Nanodegree Program.
 
 Players interact with up to the minute price data pulled from Yahoo Finance. Players can create long and short trade positions in a fast paced scrolling game, with the goal of maximizing their profits.
