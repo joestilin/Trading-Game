@@ -120,3 +120,5 @@ On the next iteration, it was realized that the a  vertical offset, rather than 
 
 Now the window frame was moving along with up-and-down price action, but depending on the financial instrument or ticker, the vertical scale could appear too cramped or too spread out vertically. This was fixed by pre-calculating the volatility (same as standard deviation) of the entire financial dataset. It was found that simply dividing the screen height in pixels by the volatility provided a good vertical scaling.
 
+The final iteration called for a rolling volatility calculation rather than overall volatility of the entire dataset. This calculates the volatility backwards over a given window, and when tuned results in a reliable display of the data as it scrolls.
+
